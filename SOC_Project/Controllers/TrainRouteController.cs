@@ -14,8 +14,6 @@ namespace SOC_Project.Controllers
         [Route("CreateTrain")]
         public IActionResult CreateTrainRoute(TrainRoute routeData)
         {
-
-
             if (WebTokenValidate.TokenValidateing(routeData.Token)) 
             {
                 try
