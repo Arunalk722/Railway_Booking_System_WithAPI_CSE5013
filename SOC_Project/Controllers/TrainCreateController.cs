@@ -9,7 +9,7 @@ namespace SOC_Project.Controllers
     public class TrainCreateController : Controller
     {
         [HttpPost]
-        [Route("Create")]
+        [Route("/CreateTrain")]
         public IActionResult Index(MakeTrainList makeTrain)
         {
             if (!WebTokenValidate.TokenValidateing(makeTrain.Token))
@@ -50,6 +50,7 @@ namespace SOC_Project.Controllers
                 }
                 catch (Exception ex)
                 {
+                    LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
                         SCode = 400, // Or a more appropriate code based on the error
@@ -58,8 +59,9 @@ namespace SOC_Project.Controllers
                 }
             }
         }
+
         [HttpPut]
-        [Route("UpdateTrain")]
+        [Route("/UpdateTrain")]
         public IActionResult Update(MakeTrainList makeTrain)
         {
             if (!WebTokenValidate.TokenValidateing(makeTrain.Token))
@@ -101,6 +103,7 @@ namespace SOC_Project.Controllers
                 }
                 catch (Exception ex)
                 {
+                    LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
                         SCode = 400, // Or a more appropriate code based on the error
@@ -112,8 +115,8 @@ namespace SOC_Project.Controllers
         }
 
         [HttpGet]
-        [Route("ViewTrain")]
-        public async Task<IActionResult> ViewTrain(string token)
+        [Route("/ViewAllTrain")]
+        public async Task<IActionResult> ViewAllTrain(string token)
         {
             if (!WebTokenValidate.TokenValidateing(token))
             {
@@ -161,6 +164,7 @@ namespace SOC_Project.Controllers
                 }
                 catch (Exception ex)
                 {
+                    LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
                         SCode = 400, // Or a more appropriate code based on the error
@@ -169,6 +173,118 @@ namespace SOC_Project.Controllers
                 }
             }
            
+        }
+
+        [HttpGet]
+        [Route("/ViewOneTrain")]
+        public async Task<IActionResult> ViewOneTrain(string token,int TrainId)
+        {
+            if (!WebTokenValidate.TokenValidateing(token))
+            {
+                return Unauthorized(new StatusMessage
+                {
+                    SCode = 401,
+                    SMessage = "unauthorized token"
+                });
+            }
+            else
+            {
+                try
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[]
+                  {
+                    new SqlParameter("@TrainId",TrainId),
+                  };
+                    string SQLQuery = "SELECT * FROM tbl_TrainList where TrainId=@TrainId";
+                    using (SqlDataReader dr = SQLConnection.PrmRead(SQLQuery, sqlParameters))
+                    {
+                       
+                        if (dr.Read())
+                        {
+                            return Ok(new TrainList
+                            {
+                                SCode = 200,
+                                IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
+                                TrainId = Convert.ToInt32(dr["TrainId"].ToString()),
+                                TrainName = dr["TrainName"].ToString()
+                            });
+                        }
+                        else
+                        {
+                            return Ok(new TrainList
+                            {
+                                SCode = 204,
+                                TrainId = 0,
+                                TrainName = "NA",
+                                IsActive = false
+                            });
+                        }                         
+                                          
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    LogToText.ExceptionLog(ex);
+                    return BadRequest(new StatusMessage
+                    {
+                        SCode = 400, // Or a more appropriate code based on the error
+                        SMessage = "An error occurred while selecting the train. Please check your input data."
+                    });
+                }
+            }
+
+        }
+
+        [HttpDelete]
+        [Route("/DeleteTrain")]
+        public async Task<IActionResult> DeleteTrain(string token, int TrainId)
+        {
+            if (!WebTokenValidate.TokenValidateing(token))
+            {
+                return Unauthorized(new StatusMessage
+                {
+                    SCode = 401,
+                    SMessage = "unauthorized token"
+                });
+            }
+            else
+            {
+                try
+                {
+                    SqlParameter[] sqlParameters = new SqlParameter[]
+                   {
+                    new SqlParameter("@TrainId",TrainId),
+                   };
+                    string query = "delete [tbl_TrainList] where TrainId=@TrainId";
+                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    {
+                        return Ok(new StatusMessage
+                        {
+                            SCode = 200,
+                            SMessage = "Train was deleted"
+                        });
+                    }
+                    else
+                    {
+                        return BadRequest(new StatusMessage
+                        {
+                            SCode = 500, // Or a more appropriate code based on the error
+                            SMessage = "An internal error occurred while deleting the train. Please check your input data."
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogToText.ExceptionLog(ex);
+                    return BadRequest(new StatusMessage
+                    {
+                        SCode = 400, // Or a more appropriate code based on the error
+                        SMessage = "An error occurred while deleting the train. Please check your input data."
+                    });
+                }
+            }
+
         }
     }
     public class MakeTrainList

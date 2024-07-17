@@ -2,7 +2,7 @@
 {
     public class LogToText
     {
-        public static void exceptionLog(Exception exception)
+        public static void ExceptionLog(Exception exception)
         {
             try
             {
