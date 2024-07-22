@@ -68,7 +68,7 @@ namespace SOC_Project.Controllers
 
         [HttpPost]
         [Route("/Update")]
-        public IActionResult UpdateTrainRoute(TrainRoute routeData)
+        public IActionResult UpdateTrainRoute(TrainRoute routeData,int routeId)
         {
             if (WebTokenValidate.TokenValidateing(routeData.Token))
             {
@@ -76,6 +76,7 @@ namespace SOC_Project.Controllers
                 {
                     SqlParameter[] sqlParameters = new SqlParameter[]
                     {
+                    new SqlParameter("@RouteId",routeId),
                     new SqlParameter("@TrainID",routeData.TrainId),
                     new SqlParameter("@SourLocation",routeData.SourLocatin),
                     new SqlParameter("@DestLocation",routeData.DestLocation),
@@ -126,7 +127,7 @@ namespace SOC_Project.Controllers
 
         [HttpDelete]
         [Route("/Delete")]
-        public IActionResult DeleteRoute(string token, string routeId)
+        public IActionResult DeleteRoute(string token, int RouteId)
         {
 
             if (WebTokenValidate.TokenValidateing(token))
@@ -135,7 +136,7 @@ namespace SOC_Project.Controllers
                 {
                     SqlParameter[] sqlParameters = new SqlParameter[]
                     {
-                    new SqlParameter("@TrainID",routeId),                   
+                    new SqlParameter("@RouteId",RouteId),                   
                     };
                     string query = "DELETE [dbo].[tbl_TrainRoute] WHERE [RouteId] = @RouteId";
 
