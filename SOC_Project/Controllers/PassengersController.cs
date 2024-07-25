@@ -16,35 +16,53 @@ namespace SOC_Project.Controllers
             {
                 try
                 {
-
-                    int a = 1;
-                    SqlParameter[] sqlParameters = new SqlParameter[]
+                   
+                    SqlParameter[] checkNIC = new SqlParameter[]
                     {
+                           new SqlParameter("@NIC", passengerListReqBody.NIC),
+                    };
+
+                    using (SqlDataReader dr = SQLConnection.PrmRead("SELECT NIC FROM Tbl_PassengerList where NIC=@NIC", checkNIC))
+                    {
+                        if (!dr.Read()) {
+                            int a = 1;
+                            SqlParameter[] sqlParameters = new SqlParameter[]
+                               {
                         new SqlParameter("@NIC", passengerListReqBody.NIC),
                         new SqlParameter("@FullName", passengerListReqBody.FullName),
                         new SqlParameter("@PhoneNo", passengerListReqBody.PhoneNo),
                         new SqlParameter("@EmailAddress", passengerListReqBody.EmailAddress),
-                        new SqlParameter("@RouteCount", a)
-                    };
-
-                    string query = "INSERT INTO [dbo].[Tbl_PassengerList] ([NIC], [FullName], [PhoneNo], [EmailAddress], [RouteCount]) VALUES (@NIC, @FullName, @PhoneNo, @EmailAddress, @RouteCount)";
-
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
-                    {
-                        return Ok(new StatusMessage
+                        new SqlParameter("@RouteCount", a),
+                        new SqlParameter("@IsActive",true)
+                             };
+                            string query = "INSERT INTO [dbo].[Tbl_PassengerList] ([NIC], [FullName], [PhoneNo], [EmailAddress], [RouteCount],[IsActive]) VALUES (@NIC, @FullName, @PhoneNo, @EmailAddress, @RouteCount,@IsActive)";
+                            if (SQLConnection.PrmWrite(query, sqlParameters))
+                            {
+                                return Ok(new StatusMessage
+                                {
+                                    SCode = 200,
+                                    SMessage = "Passenger inserted successfully"
+                                });
+                            }
+                            else
+                            {
+                                return BadRequest(new StatusMessage
+                                {
+                                    SCode = 500,
+                                    SMessage = "An internal error occurred while creating the new passenger. Please check your input data."
+                                });
+                            }
+                        }
+                        else
                         {
-                            SCode = 200,
-                            SMessage = "Passenger inserted successfully"
-                        });
-                    }
-                    else
-                    {
-                        return BadRequest(new StatusMessage
-                        {
-                            SCode = 500,
-                            SMessage = "An internal error occurred while creating the new passenger. Please check your input data."
-                        });
-                    }
+                            return Ok(new StatusMessage
+                            {
+                                SCode = 404,
+                                SMessage = "Your already registed in the system"
+                            });
+                        }
+                    }                
+                  
                 }
                 catch (Exception ex)
                 {
@@ -104,14 +122,10 @@ namespace SOC_Project.Controllers
                         }
                         else
                         {
-                            return Ok(new ListOfPassengers
+                            return BadRequest(new StatusMessage
                             {
-                                SCode = 204,
-                                FullName = "NA",
-                                PhoneNo = "NA",
-                                EmailAddress = "NA",
-                                RouteCount = 0,
-                                IsActive = false
+                                SCode = 404,
+                                SMessage = "No data to view"
                             });
                         }
 
@@ -146,18 +160,21 @@ namespace SOC_Project.Controllers
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         List<ListOfPassengers> dataSetList = new List<ListOfPassengers>();
-                        while (dr.Read())
+                        if (dr != null)
                         {
-                            dataSetList.Add(new ListOfPassengers
+                            while (dr.Read())
                             {
-                                SCode = 200,
-                                NIC = dr["NIC"].ToString(),
-                                FullName = dr["FullName"].ToString(),
-                                PhoneNo = dr["PhoneNo"].ToString(),
-                                EmailAddress = dr["EmailAddress"].ToString(),
-                                RouteCount = Convert.ToInt32(dr["RouteCount"].ToString()),
-                                 IsActive= Convert.ToBoolean(dr["IsActive"].ToString()),
-                            });
+                                dataSetList.Add(new ListOfPassengers
+                                {
+                                    SCode = 200,
+                                    NIC = dr["NIC"].ToString(),
+                                    FullName = dr["FullName"].ToString(),
+                                    PhoneNo = dr["PhoneNo"].ToString(),
+                                    EmailAddress = dr["EmailAddress"].ToString(),
+                                    RouteCount = Convert.ToInt32(dr["RouteCount"].ToString()),
+                                    IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
+                                });
+                            }
                         }
                         if (dataSetList.Count == 0)
                         {

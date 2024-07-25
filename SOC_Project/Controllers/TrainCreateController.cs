@@ -43,7 +43,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500, // Or a more appropriate code based on the error
+                            SCode = 500,
                             SMessage = "An internal error occurred while creating the train. Please check your input data."
                         });
                     }
@@ -53,7 +53,7 @@ namespace SOC_Project.Controllers
                     LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
-                        SCode = 400, // Or a more appropriate code based on the error
+                        SCode = 400, 
                         SMessage = "An error occurred while creating the train. Please check your input data."
                     });
                 }
@@ -96,7 +96,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500, // Or a more appropriate code based on the error
+                            SCode = 500, 
                             SMessage = "An internal error occurred while Updating the train. Please check your input data."
                         });
                     }
@@ -106,7 +106,7 @@ namespace SOC_Project.Controllers
                     LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
-                        SCode = 400, // Or a more appropriate code based on the error
+                        SCode = 400, 
                         SMessage = "An error occurred while Updating the train. Please check your input data."
                     });
                 }
@@ -138,15 +138,18 @@ namespace SOC_Project.Controllers
                     using (SqlDataReader dr = SQLConnection.PrmRead(SQLQuery, sqlParameters))
                     {
                         List<TrainList> trainList = new List<TrainList>();
-                        while (dr.Read())
+                        if (dr != null)
                         {
-                            trainList.Add(new TrainList
+                            while (dr.Read())
                             {
-                                SCode=200,
-                                IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
-                                TrainId = Convert.ToInt32(dr["TrainId"].ToString()),
-                                TrainName = dr["TrainName"].ToString()
-                            });
+                                trainList.Add(new TrainList
+                                {
+                                    SCode = 200,
+                                    IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
+                                    TrainId = Convert.ToInt32(dr["TrainId"].ToString()),
+                                    TrainName = dr["TrainName"].ToString()
+                                });
+                            }
                         }
                         if (trainList.Count == 0)
                         {

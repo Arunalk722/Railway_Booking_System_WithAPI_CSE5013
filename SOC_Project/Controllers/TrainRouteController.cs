@@ -195,17 +195,20 @@ namespace SOC_Project.Controllers
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         List<ListOfRoutes> listOfRoutes = new List<ListOfRoutes>();
-                        while (dr.Read())
+                        if (dr != null)
                         {
-                            listOfRoutes.Add(new ListOfRoutes
+                            while (dr.Read())
                             {
-                                SCode = 200,
-                                RouteId = Convert.ToInt32(dr["RouteId"]),
-                                TrainID = Convert.ToInt32(dr["TrainID"]),
-                                SourLocation = dr["SourLocation"].ToString(),
-                                DestLocation = dr["DestLocation"].ToString(),
-                                SchaduleTime = dr["SchaduleTime"].ToString()
-                            });
+                                listOfRoutes.Add(new ListOfRoutes
+                                {
+                                    SCode = 200,
+                                    RouteId = Convert.ToInt32(dr["RouteId"]),
+                                    TrainID = Convert.ToInt32(dr["TrainID"]),
+                                    SourLocation = dr["SourLocation"].ToString(),
+                                    DestLocation = dr["DestLocation"].ToString(),
+                                    SchaduleTime = dr["SchaduleTime"].ToString()
+                                });
+                            }
                         }
                         if (listOfRoutes.Count == 0)
                         {
