@@ -49,7 +49,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while creating the train. Please check your input data."
                         });
                     }
@@ -100,16 +100,29 @@ namespace SOC_Project.Controllers
 
                                 });
                             }
-                            return Ok(dataSetList);
+                            if (dataSetList.Count != 0)
+                            {
+                                return Ok(dataSetList);
+                            }
+                            else
+                            {
+                                return BadRequest(new StatusMessage
+                                {
+                                    SCode = 404,
+                                    SMessage = "No data to view"
+                                });
+                            }
                         }
                         else
                         {
                             return BadRequest(new StatusMessage
                             {
-                                SCode = 404,
+                                SCode = 502,
                                 SMessage = "No data to view"
                             });
                         }
+                            
+                       
 
                     }
                 }
@@ -167,20 +180,29 @@ namespace SOC_Project.Controllers
 
                                 });
                             }
-                        }
-
-                        if (dataSetList.Count == 0)
-                        {
-                            dataSetList.Add(new TraingBookingList
+                            if (dataSetList.Count != 0)
                             {
-                                SCode = 204,
-                                BookingID = 0,
-                                TrainID = 0,
-                                RouteID = 0,
-                                NIC = "NA",
+                                return Ok(dataSetList);
+                            }
+                            else
+                            {
+                                return BadRequest(new StatusMessage
+                                {
+                                    SCode = 404,
+                                    SMessage = "No data to view"
+                                });
+                            }
+                        }
+                        
+                        else
+                        {
+                            return BadRequest(new StatusMessage
+                            {
+                                SCode = 502,
+                                SMessage = "No data to view"
                             });
                         }
-                        return Ok(dataSetList);
+
                     }
                 }
                 catch (Exception ex)
@@ -241,7 +263,7 @@ namespace SOC_Project.Controllers
                                     }
                                     else
                                     {
-                                        return Unauthorized(new StatusMessage
+                                        return BadRequest(new StatusMessage
                                         {
                                             SCode = 404,
                                             SMessage = "booking status update failed"
@@ -250,7 +272,7 @@ namespace SOC_Project.Controllers
                                 }
                                 else
                                 {
-                                    return Unauthorized(new StatusMessage
+                                    return BadRequest(new StatusMessage
                                     {
                                         SCode = 404,
                                         SMessage = "Already traveled this booking. can't be cancel"
@@ -259,7 +281,7 @@ namespace SOC_Project.Controllers
                             }
                             else
                             {
-                                return Unauthorized(new StatusMessage
+                                return BadRequest(new StatusMessage
                                 {
                                     SCode = 404,
                                     SMessage = "Please verify NIC Number for cancel booking"

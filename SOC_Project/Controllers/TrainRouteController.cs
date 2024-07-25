@@ -41,7 +41,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while creating the train route. Please check your input data."
                         });
                     }
@@ -67,7 +67,7 @@ namespace SOC_Project.Controllers
         }
 
         [HttpPost]
-        [Route("/Update")]
+        [Route("/UpdateRoute")]
         public IActionResult UpdateTrainRoute(TrainRoute routeData,int routeId)
         {
             if (WebTokenValidate.TokenValidateing(routeData.Token))
@@ -99,7 +99,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while updating the train route. Please check your input data."
                         });
                     }
@@ -126,7 +126,7 @@ namespace SOC_Project.Controllers
         }
 
         [HttpDelete]
-        [Route("/Delete")]
+        [Route("/DeleteRoute")]
         public IActionResult DeleteRoute(string token, int RouteId)
         {
 
@@ -152,7 +152,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while delete the train route. Please check your input data."
                         });
                     }
@@ -177,7 +177,6 @@ namespace SOC_Project.Controllers
                 });
             }
         }
-
 
         [HttpGet]
         [Route("/ViewAllRoute")]
@@ -210,19 +209,19 @@ namespace SOC_Project.Controllers
                                 });
                             }
                         }
-                        if (listOfRoutes.Count == 0)
+                        if (listOfRoutes.Count != 0)
                         {
-                            listOfRoutes.Add(new ListOfRoutes
+                            return Ok(listOfRoutes);
+                            
+                        }
+                        else
+                        {
+                            return BadRequest(new StatusMessage
                             {
-                                SCode = 204,
-                                RouteId = 0,
-                                TrainID = 0,
-                                SourLocation = "NA",
-                                DestLocation = "NA",
-                                SchaduleTime = "NA"
+                                SCode = 404,
+                                SMessage = "No data to view"
                             });
                         }
-                        return Ok(listOfRoutes);
                     }
                 }
                 catch (Exception ex)

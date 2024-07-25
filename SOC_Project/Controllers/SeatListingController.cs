@@ -69,6 +69,7 @@ namespace SOC_Project.Controllers
     }
     public class TakedSeatList
     {
+        public int sCode { get; set; }
         public int BookSeatNo { get; set; }
     }
     public class CheckLocationRBody

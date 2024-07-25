@@ -43,7 +43,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while creating the train. Please check your input data."
                         });
                     }
@@ -96,7 +96,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500, 
+                            SCode = 412, 
                             SMessage = "An internal error occurred while Updating the train. Please check your input data."
                         });
                     }
@@ -150,18 +150,27 @@ namespace SOC_Project.Controllers
                                     TrainName = dr["TrainName"].ToString()
                                 });
                             }
-                        }
-                        if (trainList.Count == 0)
-                        {
-                            trainList.Add(new TrainList
+                            if (trainList.Count != 0)
                             {
-                                SCode = 204,
-                                TrainId = 0,
-                                TrainName = "NA",
-                                IsActive = false
+                                return Ok(trainList);
+                            }
+                            else{
+                                return BadRequest(new StatusMessage
+                                {
+                                    SCode = 404,
+                                    SMessage = "No data to view"
+                                });
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest(new StatusMessage
+                            {
+                                SCode = 502,
+                                SMessage = "No data to view"
                             });
                         }
-                        return Ok(trainList);
+
                     }
                   
                 }
@@ -170,7 +179,7 @@ namespace SOC_Project.Controllers
                     LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
-                        SCode = 400, // Or a more appropriate code based on the error
+                        SCode = 400, 
                         SMessage = "An error occurred while selecting the train. Please check your input data."
                     });
                 }
@@ -214,12 +223,10 @@ namespace SOC_Project.Controllers
                         }
                         else
                         {
-                            return Ok(new TrainList
+                            return BadRequest(new StatusMessage
                             {
-                                SCode = 204,
-                                TrainId = 0,
-                                TrainName = "NA",
-                                IsActive = false
+                                SCode = 404,
+                                SMessage = "No data to view"
                             });
                         }                         
                                           
@@ -231,7 +238,7 @@ namespace SOC_Project.Controllers
                     LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
-                        SCode = 400, // Or a more appropriate code based on the error
+                        SCode = 400, 
                         SMessage = "An error occurred while selecting the train. Please check your input data."
                     });
                 }
@@ -272,7 +279,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500, // Or a more appropriate code based on the error
+                            SCode = 412, 
                             SMessage = "An internal error occurred while deleting the train. Please check your input data."
                         });
                     }
@@ -282,7 +289,7 @@ namespace SOC_Project.Controllers
                     LogToText.ExceptionLog(ex);
                     return BadRequest(new StatusMessage
                     {
-                        SCode = 400, // Or a more appropriate code based on the error
+                        SCode = 400, 
                         SMessage = "An error occurred while deleting the train. Please check your input data."
                     });
                 }

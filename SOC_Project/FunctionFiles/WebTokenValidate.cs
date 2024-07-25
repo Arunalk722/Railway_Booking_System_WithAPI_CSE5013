@@ -61,11 +61,11 @@ namespace SOC_Project.FunctionFiles
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return true;
+                return false;
             }
 
             //for testing all incoming traffic is allow
-            return true;
+          //  return true;
         }
     }
 }

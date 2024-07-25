@@ -23,7 +23,7 @@ namespace SOC_Project.Controllers
                     };
                     using (SqlDataReader dr = SQLConnection.PrmRead("SELECT IsActive,IsTraveled from tbl_Booking where BookingID=@BookingID", checkStatus))
                     {
-                        if (dr.Read())
+                        if (dr!=null)
                         {
                             if (Convert.ToBoolean(dr["IsActive"]) == true)
                             {
@@ -38,7 +38,7 @@ namespace SOC_Project.Controllers
                                     }
                                     else
                                     {
-                                        return BadRequest(new { SCode = 401, SMessage = "Error to updating booking." });
+                                        return BadRequest(new { SCode = 412, SMessage = "Error to updating booking." });
                                     }
                                 }
                                 else
@@ -55,7 +55,7 @@ namespace SOC_Project.Controllers
                         }
                         else
                         {
-                            return BadRequest(new { SCode = 404, SMessage = $"Please check booking id {bookingID}" });
+                            return BadRequest(new { SCode = 502, SMessage = $"Please check booking id {bookingID}" });
                         }
                     }
                 }

@@ -83,6 +83,7 @@ namespace SOC_Project.Controllers
 
                     using (SqlDataReader reader = SQLConnection.PrmRead(SQLQuery, sqlParameters.ToArray())) 
                     { 
+                        Console.WriteLine(reader.ToString());
                         if(reader !=null)
                         {
                             while (reader.Read())
@@ -117,14 +118,26 @@ namespace SOC_Project.Controllers
                                 bookingDetailsList.Add(details);
                             }
                             reader.Close();
-                            return Ok(bookingDetailsList);
+                           
+                            if(bookingDetailsList.Count > 0)
+                            {
+                                return Ok(bookingDetailsList);
+                            }
+                            else
+                            {
+                                 return BadRequest(new StatusMessage
+                            {
+                                SCode=404,
+                                SMessage="No data to view"
+                            });
+                            }
                         }
                         else
                         {
                             return BadRequest(new StatusMessage
                             {
-                                SCode=404,
-                                SMessage="No data to view"
+                                SCode = 502,
+                                SMessage = "No data to view"
                             });
                         }
                     }

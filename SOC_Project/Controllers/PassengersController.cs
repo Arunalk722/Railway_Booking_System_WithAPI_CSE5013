@@ -48,7 +48,7 @@ namespace SOC_Project.Controllers
                             {
                                 return BadRequest(new StatusMessage
                                 {
-                                    SCode = 500,
+                                    SCode = 412,
                                     SMessage = "An internal error occurred while creating the new passenger. Please check your input data."
                                 });
                             }
@@ -176,20 +176,19 @@ namespace SOC_Project.Controllers
                                 });
                             }
                         }
-                        if (dataSetList.Count == 0)
+
+                        if (dataSetList.Count != 0)
                         {
-                            dataSetList.Add(new ListOfPassengers
+                            return Ok(dataSetList);
+                        }
+                        else
+                        {
+                            return BadRequest(new StatusMessage
                             {
-                                SCode = 204,
-                                NIC="NA",
-                                FullName = "NA",
-                                PhoneNo = "NA",
-                                EmailAddress = "NA",
-                                RouteCount = 0,
-                                IsActive = false,
+                                SCode = 404,
+                                SMessage = "No data to view"
                             });
                         }
-                        return Ok(dataSetList);
                     }
                 }
                 catch (Exception ex)
@@ -239,7 +238,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while delete the Passenger. Please check your input data."
                         });
                     }
@@ -293,7 +292,7 @@ namespace SOC_Project.Controllers
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 500,
+                            SCode = 412,
                             SMessage = "An internal error occurred while updating the Passenger. Please check your input data."
                         });
                     }
