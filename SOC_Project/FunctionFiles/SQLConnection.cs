@@ -11,7 +11,7 @@ namespace SOC_Project.FunctionFiles
             _configuration= configuration;
         }
 
-        public static string connURL = "Data Source=.,1433;Initial Catalog=SOC_TrainfDB;Persist Security Info=True;User ID=sa;Password=T32NBQDBA23;Max Pool Size=99999;Pooling=true;Connection Timeout=30;";
+        public static string connURL = "Data Source=192.168.50.23,8984;Initial Catalog=SOC_TrainfDB;Persist Security Info=True;User ID=sa;Password=T32NBQDBA23;Max Pool Size=99999;Pooling=true;Connection Timeout=30;";
         public static bool PrmWrite(string query, SqlParameter[] parameters)
         {
             try

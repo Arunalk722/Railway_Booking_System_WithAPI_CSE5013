@@ -24,33 +24,58 @@ namespace SOC_Project.Controllers
             {
                 try
                 {
-                    SqlParameter[] sqlParameters = new SqlParameter[]
-                   {
+                    if (checkMaxBookingCount(reqBody.NIC) <= 4) {
+                    int bookingId = GetMaxBookingId();
+                        if (bookingId > 0)
+                        {
+                            SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID",bookingId),
                     new SqlParameter("@TraindID",reqBody.TrainID),
                     new SqlParameter("@RouteID",reqBody.RouteID),
-                    new SqlParameter("@PassengerNIC",reqBody.NIC),                    
+                    new SqlParameter("@PassengerNIC",reqBody.NIC),
                     new SqlParameter("@BookDate",reqBody.BookDate.ToDateTime(new TimeOnly(0, 0))),
                     new SqlParameter("@PasengerName",reqBody.PasengerName),
                     new SqlParameter("@BookSeatNo",reqBody.BookSeatNo),
                      new SqlParameter("@EnterDate", DateTime.Now.ToString()),
                     new SqlParameter("@IsActive",true),
                     new SqlParameter("@IsTraveled",false),
-                   };
-                    string query = "INSERT INTO [dbo].[tbl_Booking] ([TraindID], [RouteID], [PassengerNIC], [BookDate], [PasengerName], [BookSeatNo], [EnterDate], [IsActive], [IsTraveled]) VALUES (@TraindID, @RouteID, @PassengerNIC, @BookDate, @PasengerName, @BookSeatNo, @EnterDate, @IsActive, @IsTraveled)";
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
-                    {
-                        return Ok(new StatusMessage
+                };
+                            string query = "INSERT INTO [dbo].[tbl_Booking] ([BookingID],[TraindID], [RouteID], [PassengerNIC], [BookDate], [PasengerName], [BookSeatNo], [EnterDate], [IsActive], [IsTraveled]) VALUES (@BookingID,@TraindID, @RouteID, @PassengerNIC, @BookDate, @PasengerName, @BookSeatNo, @EnterDate, @IsActive, @IsTraveled)";
+                            if (SQLConnection.PrmWrite(query, sqlParameters))
+                            {
+                                return Ok(new StatusMessage
+                                {
+                                    SCode = 200,
+                                    SMessage = $"New booking was add booking ref: {bookingId.ToString("D5")}"
+                                });
+                            }
+                            else
+                            {
+                                return BadRequest(new StatusMessage
+                                {
+                                    SCode = 412,
+                                    SMessage = "An internal error occurred while creating the train. Please check your input data."
+                                });
+                            }
+
+                        }
+                        else
                         {
-                            SCode = 200,
-                            SMessage = "New Train add"
-                        });
+                            return BadRequest(new StatusMessage
+                            {
+                                SCode = 400,
+                                SMessage = $"Invalid booking id {bookingId}"
+                            });
+                        }
+
                     }
                     else
                     {
                         return BadRequest(new StatusMessage
                         {
-                            SCode = 412,
-                            SMessage = "An internal error occurred while creating the train. Please check your input data."
+                            SCode = 400,
+                            SMessage = "Your can request 5 at booking maximum.if you need more booking please contact our support center"
                         });
                     }
                 }
@@ -63,6 +88,82 @@ namespace SOC_Project.Controllers
                         SMessage = "An error occurred while creating the train. Please check your input data."
                     });
                 }
+            }
+        }
+
+        int GetMaxBookingId()
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[]
+           {
+               new SqlParameter("@BookingID",1)
+           };
+                using (SqlDataReader dr = SQLConnection.PrmRead("SELECT MAX(BookingID) FROM tbl_Booking", sqlParameters))
+                {
+                    if (dr != null && dr.Read())
+                    {
+                        if (dr[0] != DBNull.Value)
+                        {
+                            int maxId = Convert.ToInt32(dr[0]);
+                            return maxId + 1;
+                        }
+                        else
+                        {
+                            
+                            return 1;
+                        }
+                    }
+                    else
+                    {
+                      
+                        return 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToText.ExceptionLog(ex);
+                return -1;
+            }
+        }
+
+
+        int checkMaxBookingCount(string nic)
+        {
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                    new SqlParameter("@PassengerNIC",nic)
+                };
+                using (SqlDataReader dr = SQLConnection.PrmRead("select Count(BookingID) FROM tbl_Booking where PassengerNIC=@PassengerNIC and IsActive='true' and IsTraveled='false'", sqlParameters))
+                {
+                    var countRow="";
+                    int count = 0;
+                    if (dr!=null&& dr.Read())
+                    {                       
+                            if(countRow!= null)
+                            {
+                                count= Convert.ToInt32(dr[0]);
+                            }
+                            else
+                            {
+                                count= 0;
+                            }
+                      }
+                    else
+                    {
+                        count = 0;
+                    }                       
+                    return count;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                LogToText.ExceptionLog(ex);
+                return -1;
             }
         }
 
@@ -329,7 +430,6 @@ namespace SOC_Project.Controllers
         public  DateOnly BookDate { get; set; }      
         public  int BookSeatNo { get; set; }
     }
-
     public class TraingBookingList
     {
         public int BookingID {  get; set; }
