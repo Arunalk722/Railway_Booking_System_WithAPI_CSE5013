@@ -35,7 +35,7 @@ namespace SLRD_ClientApp.Controlers
 
         private void btnS1_Click(object sender, EventArgs e)
         {
-            hcs.messageController(btnS1.Text, "S");
+          
             
         }
         void DisableSeat()

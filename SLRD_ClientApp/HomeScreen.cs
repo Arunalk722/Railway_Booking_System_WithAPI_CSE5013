@@ -58,6 +58,7 @@ namespace SLRD_ClientApp.Properties
         private void HomeScreen_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
+            messageController($"{SystemFuntion.UserName} {SystemFuntion.UserId} {SystemFuntion.UserRoleID} {SystemFuntion.Email}","S");
         }
 
         private void makeTrainToolStripMenuItem_Click(object sender, EventArgs e)
