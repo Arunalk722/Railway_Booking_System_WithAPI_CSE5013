@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SLRD_ClientApp.Controlers;
+using SLRD_ClientApp.Report;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +18,7 @@ namespace SLRD_ClientApp.Properties
         {
             InitializeComponent();
         }
-        public void messageController(string text, string code, string className, string docId)
+        public void messageController(string text, string code)
         {
             code = code.ToUpper();
             if (code == "S")
@@ -27,7 +29,7 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.ForeColor = Color.Green;
                 errprvSuccessMessage.SetError(lblMessage, text);
                 errprvSuccessMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-           //     LogWritter.messageLog(text, className, docId, "Notification");
+                //     LogWritter.messageLog(text, className, docId, "Notification");
             }
             else if (code == "I")
             {
@@ -38,7 +40,7 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.ForeColor = Color.Blue;
                 errprvInfoMessage.SetError(lblMessage, text);
                 errprvInfoMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-              //  LogWritter.messageLog(text, className, docId, "Info");
+                //  LogWritter.messageLog(text, className, docId, "Info");
             }
             else if (code == "E")
             {
@@ -48,14 +50,63 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.ForeColor = Color.Red;
                 errprvErrorMessage.SetError(lblMessage, text);
                 errprvErrorMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-             //   LogWritter.messageLog(text, className, docId, "Error");
+                //   LogWritter.messageLog(text, className, docId, "Error");
 
             }
 
         }
         private void HomeScreen_Load(object sender, EventArgs e)
         {
-         IsMdiContainer = true;
+            IsMdiContainer = true;
+        }
+
+        private void makeTrainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MakeTrain makeTrain = new MakeTrain(this);
+            makeTrain.MdiParent = this;
+            makeTrain.Show();
+        }
+
+        private void makeRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MakeRoute frm = new MakeRoute(this);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void passengerRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PassengerRegistration frm = new PassengerRegistration(this);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void makeBookingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MakeBooking frm = new MakeBooking(this);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void bookingListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListOfBookingInformation frm = new ListOfBookingInformation(this);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void trainReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListOfTrainReport frm = new ListOfTrainReport(this);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void routeReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListOfRoute frm = new ListOfRoute(this);
+            frm.MdiParent = this;
+            frm.Show();
         }
     }
 }

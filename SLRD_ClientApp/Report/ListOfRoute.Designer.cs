@@ -1,6 +1,6 @@
 ﻿namespace SLRD_ClientApp.Report
 {
-    partial class ListOfTrainReport
+    partial class ListOfRoute
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 76);
-            panel1.TabIndex = 5;
+            panel1.TabIndex = 7;
             // 
             // label2
             // 
@@ -50,9 +50,9 @@
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(52, 18);
             label2.Name = "label2";
-            label2.Size = new Size(179, 38);
+            label2.Size = new Size(199, 38);
             label2.TabIndex = 3;
-            label2.Text = "Train Report";
+            label2.Text = "List Of Routes";
             // 
             // dataGridView1
             // 
@@ -62,18 +62,18 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(800, 374);
-            dataGridView1.TabIndex = 6;
+            dataGridView1.TabIndex = 8;
             // 
-            // ListOfTrainReport
+            // ListOfRoute
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
-            Name = "ListOfTrainReport";
-            Text = "ListOfTrainReport";
-            Load += ListOfTrainReport_Load;
+            Name = "ListOfRoute";
+            Text = "ListOfRoute";
+            Load += ListOfRoute_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

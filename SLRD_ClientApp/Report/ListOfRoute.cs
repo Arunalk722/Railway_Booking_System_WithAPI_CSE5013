@@ -9,18 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SLRD_ClientApp.Controlers
+namespace SLRD_ClientApp.Report
 {
-    public partial class TicketMarking : Form
+    public partial class ListOfRoute : Form
     {
         public HomeScreen hcs;
-        public TicketMarking(HomeScreen home)
+        public ListOfRoute(HomeScreen home)
         {
             InitializeComponent();
-           hcs=home;
+            hcs = home;
         }
 
-        private void TicketMarking_Load(object sender, EventArgs e)
+        private void ListOfRoute_Load(object sender, EventArgs e)
         {
 
         }

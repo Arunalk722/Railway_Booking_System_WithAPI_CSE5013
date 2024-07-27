@@ -1,6 +1,6 @@
 ﻿namespace SLRD_ClientApp.Controlers
 {
-    partial class MakePassengers
+    partial class PassengerRegistration
     {
         /// <summary>
         /// Required designer variable.
@@ -31,15 +31,15 @@
             txtNic = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
-            groupBox1 = new GroupBox();
             label2 = new Label();
-            txtName = new TextBox();
-            label3 = new Label();
-            txtEmail = new TextBox();
-            label5 = new Label();
-            btnSave = new Button();
+            groupBox1 = new GroupBox();
             label4 = new Label();
             txtPhoneNo = new TextBox();
+            btnSave = new Button();
+            label5 = new Label();
+            label3 = new Label();
+            txtEmail = new TextBox();
+            txtName = new TextBox();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -70,6 +70,16 @@
             panel1.Size = new Size(514, 78);
             panel1.TabIndex = 4;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(98, 23);
+            label2.Name = "label2";
+            label2.Size = new Size(314, 38);
+            label2.TabIndex = 3;
+            label2.Text = "Passenger Registration";
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(label4);
@@ -89,23 +99,40 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Passenger Info";
             // 
-            // label2
+            // label4
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(98, 23);
-            label2.Name = "label2";
-            label2.Size = new Size(314, 38);
-            label2.TabIndex = 3;
-            label2.Text = "Passenger Registration";
+            label4.AutoSize = true;
+            label4.Location = new Point(107, 141);
+            label4.Name = "label4";
+            label4.Size = new Size(74, 20);
+            label4.TabIndex = 5;
+            label4.Text = "Phone No";
             // 
-            // txtName
+            // txtPhoneNo
             // 
-            txtName.Location = new Point(195, 74);
-            txtName.MaxLength = 50;
-            txtName.Name = "txtName";
-            txtName.Size = new Size(266, 27);
-            txtName.TabIndex = 3;
+            txtPhoneNo.Location = new Point(195, 138);
+            txtPhoneNo.MaxLength = 10;
+            txtPhoneNo.Name = "txtPhoneNo";
+            txtPhoneNo.Size = new Size(141, 27);
+            txtPhoneNo.TabIndex = 6;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(227, 171);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 56);
+            btnSave.TabIndex = 4;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(107, 110);
+            label5.Name = "label5";
+            label5.Size = new Size(46, 20);
+            label5.TabIndex = 2;
+            label5.Text = "Email";
             // 
             // label3
             // 
@@ -124,50 +151,24 @@
             txtEmail.Size = new Size(266, 27);
             txtEmail.TabIndex = 3;
             // 
-            // label5
+            // txtName
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(107, 110);
-            label5.Name = "label5";
-            label5.Size = new Size(46, 20);
-            label5.TabIndex = 2;
-            label5.Text = "Email";
+            txtName.Location = new Point(195, 74);
+            txtName.MaxLength = 50;
+            txtName.Name = "txtName";
+            txtName.Size = new Size(266, 27);
+            txtName.TabIndex = 3;
             // 
-            // btnSave
-            // 
-            btnSave.Location = new Point(227, 171);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(94, 56);
-            btnSave.TabIndex = 4;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(107, 141);
-            label4.Name = "label4";
-            label4.Size = new Size(74, 20);
-            label4.TabIndex = 5;
-            label4.Text = "Phone No";
-            // 
-            // txtPhoneNo
-            // 
-            txtPhoneNo.Location = new Point(195, 138);
-            txtPhoneNo.MaxLength = 10;
-            txtPhoneNo.Name = "txtPhoneNo";
-            txtPhoneNo.Size = new Size(141, 27);
-            txtPhoneNo.TabIndex = 6;
-            // 
-            // MakePassengers
+            // PassengerRegistration
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(514, 309);
             Controls.Add(groupBox1);
             Controls.Add(panel1);
-            Name = "MakePassengers";
-            Text = "MakePassengers";
+            Name = "PassengerRegistration";
+            Text = "Passenger Registration";
+            Load += MakePassengers_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             groupBox1.ResumeLayout(false);

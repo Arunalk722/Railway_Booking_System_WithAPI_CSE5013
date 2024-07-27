@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            label6 = new Label();
+            dtSchaduleTime = new DateTimePicker();
+            cmbTrainName = new ComboBox();
             label4 = new Label();
             txtDestination = new TextBox();
             btnSave = new Button();
@@ -36,12 +39,9 @@
             label3 = new Label();
             label1 = new Label();
             txtSource = new TextBox();
-            txtNic = new TextBox();
+            txtRouteId = new TextBox();
             panel1 = new Panel();
             label2 = new Label();
-            cmbRoute = new ComboBox();
-            label6 = new Label();
-            dtSchaduleTime = new DateTimePicker();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -50,7 +50,7 @@
             // 
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(dtSchaduleTime);
-            groupBox1.Controls.Add(cmbRoute);
+            groupBox1.Controls.Add(cmbTrainName);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(txtDestination);
             groupBox1.Controls.Add(btnSave);
@@ -58,7 +58,7 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(txtSource);
-            groupBox1.Controls.Add(txtNic);
+            groupBox1.Controls.Add(txtRouteId);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(0, 78);
             groupBox1.Name = "groupBox1";
@@ -66,6 +66,32 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Passenger Info";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(107, 178);
+            label6.Name = "label6";
+            label6.Size = new Size(42, 20);
+            label6.TabIndex = 10;
+            label6.Text = "Time";
+            // 
+            // dtSchaduleTime
+            // 
+            dtSchaduleTime.CustomFormat = "HH:mm:ss";
+            dtSchaduleTime.Format = DateTimePickerFormat.Custom;
+            dtSchaduleTime.Location = new Point(195, 171);
+            dtSchaduleTime.Name = "dtSchaduleTime";
+            dtSchaduleTime.Size = new Size(125, 27);
+            dtSchaduleTime.TabIndex = 9;
+            // 
+            // cmbTrainName
+            // 
+            cmbTrainName.FormattingEnabled = true;
+            cmbTrainName.Location = new Point(195, 73);
+            cmbTrainName.Name = "cmbTrainName";
+            cmbTrainName.Size = new Size(266, 28);
+            cmbTrainName.TabIndex = 7;
             // 
             // label4
             // 
@@ -116,9 +142,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(107, 44);
             label1.Name = "label1";
-            label1.Size = new Size(33, 20);
+            label1.Size = new Size(65, 20);
             label1.TabIndex = 2;
-            label1.Text = "NIC";
+            label1.Text = "Route Id";
             // 
             // txtSource
             // 
@@ -128,13 +154,13 @@
             txtSource.Size = new Size(266, 27);
             txtSource.TabIndex = 3;
             // 
-            // txtNic
+            // txtRouteId
             // 
-            txtNic.Location = new Point(195, 41);
-            txtNic.MaxLength = 12;
-            txtNic.Name = "txtNic";
-            txtNic.Size = new Size(141, 27);
-            txtNic.TabIndex = 3;
+            txtRouteId.Location = new Point(195, 41);
+            txtRouteId.MaxLength = 12;
+            txtRouteId.Name = "txtRouteId";
+            txtRouteId.Size = new Size(141, 27);
+            txtRouteId.TabIndex = 3;
             // 
             // panel1
             // 
@@ -149,37 +175,11 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(98, 23);
+            label2.Location = new Point(172, 19);
             label2.Name = "label2";
-            label2.Size = new Size(314, 38);
+            label2.Size = new Size(175, 38);
             label2.TabIndex = 3;
-            label2.Text = "Passenger Registration";
-            // 
-            // cmbRoute
-            // 
-            cmbRoute.FormattingEnabled = true;
-            cmbRoute.Location = new Point(195, 73);
-            cmbRoute.Name = "cmbRoute";
-            cmbRoute.Size = new Size(266, 28);
-            cmbRoute.TabIndex = 7;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(107, 178);
-            label6.Name = "label6";
-            label6.Size = new Size(42, 20);
-            label6.TabIndex = 10;
-            label6.Text = "Time";
-            // 
-            // dtSchaduleTime
-            // 
-            dtSchaduleTime.CustomFormat = "HH:mm:ss";
-            dtSchaduleTime.Format = DateTimePickerFormat.Custom;
-            dtSchaduleTime.Location = new Point(195, 171);
-            dtSchaduleTime.Name = "dtSchaduleTime";
-            dtSchaduleTime.Size = new Size(125, 27);
-            dtSchaduleTime.TabIndex = 9;
+            label2.Text = "Make Route";
             // 
             // MakeRoute
             // 
@@ -190,6 +190,7 @@
             Controls.Add(panel1);
             Name = "MakeRoute";
             Text = "MakeRoute";
+            Load += MakeRoute_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -207,10 +208,10 @@
         private Label label3;
         private Label label1;
         private TextBox txtSource;
-        private TextBox txtNic;
+        private TextBox txtRouteId;
         private Panel panel1;
         private Label label2;
-        private ComboBox cmbRoute;
+        private ComboBox cmbTrainName;
         private Label label6;
         private DateTimePicker dtSchaduleTime;
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SLRD_ClientApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace SLRD_ClientApp.Controlers
 {
     public partial class MakeRoute : Form
     {
-        public MakeRoute()
+        public HomeScreen hcs;
+        public MakeRoute(HomeScreen home)
         {
             InitializeComponent();
+            hcs = home;
+        }
+
+        private void MakeRoute_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

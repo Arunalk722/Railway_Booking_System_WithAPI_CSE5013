@@ -33,6 +33,8 @@
             label5 = new Label();
             txtTrainName = new TextBox();
             btnSave = new Button();
+            txtTrainId = new TextBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,7 +44,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(432, 78);
+            panel1.Size = new Size(430, 78);
             panel1.TabIndex = 7;
             // 
             // label2
@@ -58,7 +60,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(42, 116);
+            label5.Location = new Point(42, 169);
             label5.Name = "label5";
             label5.Size = new Size(85, 20);
             label5.TabIndex = 8;
@@ -66,7 +68,7 @@
             // 
             // txtTrainName
             // 
-            txtTrainName.Location = new Point(130, 113);
+            txtTrainName.Location = new Point(130, 166);
             txtTrainName.MaxLength = 50;
             txtTrainName.Name = "txtTrainName";
             txtTrainName.Size = new Size(266, 27);
@@ -74,24 +76,44 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(169, 161);
+            btnSave.Location = new Point(179, 249);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 56);
             btnSave.TabIndex = 10;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             // 
+            // txtTrainId
+            // 
+            txtTrainId.Location = new Point(130, 133);
+            txtTrainId.MaxLength = 50;
+            txtTrainId.Name = "txtTrainId";
+            txtTrainId.Size = new Size(266, 27);
+            txtTrainId.TabIndex = 9;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(42, 136);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 20);
+            label1.TabIndex = 8;
+            label1.Text = "Train Id";
+            // 
             // MakeTrain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 240);
+            ClientSize = new Size(430, 371);
             Controls.Add(btnSave);
+            Controls.Add(label1);
             Controls.Add(label5);
+            Controls.Add(txtTrainId);
             Controls.Add(txtTrainName);
             Controls.Add(panel1);
             Name = "MakeTrain";
             Text = "MakeTrain";
+            Load += MakeTrain_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -105,5 +127,7 @@
         private Label label5;
         private TextBox txtTrainName;
         private Button btnSave;
+        private TextBox txtTrainId;
+        private Label label1;
     }
 }

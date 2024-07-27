@@ -85,13 +85,14 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(498, 273);
+            ClientSize = new Size(498, 201);
             Controls.Add(btnSave);
             Controls.Add(label5);
             Controls.Add(txtTktNo);
             Controls.Add(panel1);
             Name = "TicketMarking";
             Text = "TicketMarking";
+            Load += TicketMarking_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

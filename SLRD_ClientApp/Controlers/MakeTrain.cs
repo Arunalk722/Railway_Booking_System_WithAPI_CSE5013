@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SLRD_ClientApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace SLRD_ClientApp.Controlers
 {
     public partial class MakeTrain : Form
     {
-        public MakeTrain()
+        public HomeScreen hcs;
+        public MakeTrain(HomeScreen home)
         {
             InitializeComponent();
+            hcs = home;
+        }
+
+        private void MakeTrain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SLRD_ClientApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace SLRD_ClientApp.Report
 {
     public partial class ListOfBookingInformation : Form
     {
-        public ListOfBookingInformation()
+        public HomeScreen hcs;
+        public ListOfBookingInformation(HomeScreen home)
         {
             InitializeComponent();
+            home = hcs;
+        }
+
+        private void ListOfBookingInformation_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
