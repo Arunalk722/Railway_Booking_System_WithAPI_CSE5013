@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,5 +21,96 @@ namespace SLRD_ClientApp
         public static string UserRole { get; set; }
         public static int UserRoleID { get; set; }
 
+    }
+
+    public class APICalling
+    {
+        public async static Task<string> PostMethodCalling(string requestUrl, object content)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(SystemFuntion.ApiURL);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = await client.PostAsJsonAsync(requestUrl, content);
+                    response.EnsureSuccessStatusCode();
+
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception appropriately (e.g., logging)
+                return null;
+            }
+        }
+
+        public async static Task<string> GetMethodCalling(string requestUrl)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(SystemFuntion.ApiURL);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = await client.GetAsync(requestUrl);
+                    response.EnsureSuccessStatusCode();
+
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception appropriately (e.g., logging)
+                return null;
+            }
+        }
+
+        public async static Task<string> DeleteMethodCalling(string requestUrl)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(SystemFuntion.ApiURL);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = await client.DeleteAsync(requestUrl);
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception appropriately (e.g., logging)
+                return null;
+            }
+        }
+
+        public async static Task<string> PutMethodCalling(string requestUrl, object content)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(SystemFuntion.ApiURL);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = await client.PutAsJsonAsync(requestUrl, content);
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception appropriately (e.g., logging)
+                return null;
+            }
+        }
     }
 }

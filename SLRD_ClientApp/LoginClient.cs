@@ -1,3 +1,4 @@
+using SLRD_ClientApp.Class_flies;
 using SLRD_ClientApp.Properties;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -34,7 +35,8 @@ namespace SLRD_ClientApp
         {
             try
             {
-                UserAuth user = new UserAuth {
+                LoginClass user = new LoginClass
+                {
                     Pwd=txtPwd.Text,
                     Token=SystemFuntion.Token,
                     UserName=txtUserName.Text,
@@ -81,10 +83,5 @@ namespace SLRD_ClientApp
     }
 
 
-    public class UserAuth
-    {
-        required public string Token { get; set; }
-        required public string UserName { get; set; }
-        required public string Pwd { get; set; }
-    }
+    
 }

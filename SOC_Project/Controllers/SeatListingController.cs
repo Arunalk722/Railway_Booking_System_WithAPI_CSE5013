@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SOC_Project.Class_files;
 using SOC_Project.FunctionFiles;
 using System.Data.SqlClient;
 
@@ -67,16 +68,5 @@ namespace SOC_Project.Controllers
             }
         }
     }
-    public class TakedSeatList
-    {
-        public int sCode { get; set; }
-        public int BookSeatNo { get; set; }
-    }
-    public class CheckLocationRBody
-    {
-        public string Token { get; set; }
-       public int TrainID { get; set; }
-        public int RouteID { get; set; }
-        public DateOnly BookingDate { get; set; }        
-    }
+  
 }

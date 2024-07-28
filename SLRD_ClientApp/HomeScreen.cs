@@ -63,14 +63,14 @@ namespace SLRD_ClientApp.Properties
 
         private void makeTrainToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MakeTrain makeTrain = new MakeTrain(this);
+            MakeTrain makeTrain = new MakeTrain(this,0);
             makeTrain.MdiParent = this;
             makeTrain.Show();
         }
 
         private void makeRouteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MakeRoute frm = new MakeRoute(this);
+            MakeRoute frm = new MakeRoute(this,0);
             frm.MdiParent = this;
             frm.Show();
         }

@@ -35,6 +35,8 @@
             btnSave = new Button();
             txtTrainId = new TextBox();
             label1 = new Label();
+            chkIsActive = new CheckBox();
+            btnDelete = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -51,11 +53,11 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(130, 25);
+            label2.Location = new Point(81, 26);
             label2.Name = "label2";
-            label2.Size = new Size(163, 38);
+            label2.Size = new Size(265, 38);
             label2.TabIndex = 3;
-            label2.Text = "Make Train";
+            label2.Text = "Train Management";
             // 
             // label5
             // 
@@ -76,12 +78,13 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(179, 249);
+            btnSave.BackColor = Color.FromArgb(0, 192, 0);
+            btnSave.Location = new Point(282, 262);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 56);
             btnSave.TabIndex = 10;
             btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
             // txtTrainId
@@ -91,6 +94,7 @@
             txtTrainId.Name = "txtTrainId";
             txtTrainId.Size = new Size(266, 27);
             txtTrainId.TabIndex = 9;
+            txtTrainId.KeyDown += txtTrainId_KeyDown;
             // 
             // label1
             // 
@@ -101,11 +105,34 @@
             label1.TabIndex = 8;
             label1.Text = "Train Id";
             // 
+            // chkIsActive
+            // 
+            chkIsActive.AutoSize = true;
+            chkIsActive.Location = new Point(130, 199);
+            chkIsActive.Name = "chkIsActive";
+            chkIsActive.Size = new Size(86, 24);
+            chkIsActive.TabIndex = 11;
+            chkIsActive.Text = "Is Active";
+            chkIsActive.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Red;
+            btnDelete.Location = new Point(130, 262);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 56);
+            btnDelete.TabIndex = 12;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
             // MakeTrain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(430, 371);
+            Controls.Add(btnDelete);
+            Controls.Add(chkIsActive);
             Controls.Add(btnSave);
             Controls.Add(label1);
             Controls.Add(label5);
@@ -130,5 +157,7 @@
         private Button btnSave;
         private TextBox txtTrainId;
         private Label label1;
+        private CheckBox chkIsActive;
+        private Button btnDelete;
     }
 }

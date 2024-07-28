@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SOC_Project.FunctionFiles;
 using System.Data.SqlClient;
+using SOC_Project.Class_files;
 
 namespace SOC_Project.Controllers
 {
@@ -297,20 +298,5 @@ namespace SOC_Project.Controllers
 
         }
     }
-    public class MakeTrainList
-    {
-        public string Token { get; set; }
-        public int TrainId { get; set; }
-        public string TrainName { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
-    }
-    public class TrainList
-    {
-        public int SCode { get; set; }
-        public int TrainId { get; set; }
-        public string TrainName { get; set; }
-        public bool IsActive { get; set; } 
-        
-    }
+
 }

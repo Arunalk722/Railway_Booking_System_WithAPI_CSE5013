@@ -61,8 +61,10 @@
             dataGridView1.Location = new Point(0, 76);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(800, 374);
             dataGridView1.TabIndex = 8;
+            dataGridView1.CellMouseDown += dataGridView1_CellMouseDown;
             // 
             // ListOfRoute
             // 

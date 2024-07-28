@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            chkIsActive = new CheckBox();
+            lblTrainID = new Label();
+            btnDelete = new Button();
             label6 = new Label();
             dtSchaduleTime = new DateTimePicker();
             cmbTrainName = new ComboBox();
@@ -48,6 +51,9 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(chkIsActive);
+            groupBox1.Controls.Add(lblTrainID);
+            groupBox1.Controls.Add(btnDelete);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(dtSchaduleTime);
             groupBox1.Controls.Add(cmbTrainName);
@@ -66,6 +72,35 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Passenger Info";
+            // 
+            // chkIsActive
+            // 
+            chkIsActive.AutoSize = true;
+            chkIsActive.Location = new Point(195, 204);
+            chkIsActive.Name = "chkIsActive";
+            chkIsActive.Size = new Size(86, 24);
+            chkIsActive.TabIndex = 13;
+            chkIsActive.Text = "Is Active";
+            chkIsActive.UseVisualStyleBackColor = true;
+            // 
+            // lblTrainID
+            // 
+            lblTrainID.AutoSize = true;
+            lblTrainID.Location = new Point(419, 77);
+            lblTrainID.Name = "lblTrainID";
+            lblTrainID.Size = new Size(24, 20);
+            lblTrainID.TabIndex = 12;
+            lblTrainID.Text = "ID";
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(172, 251);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 56);
+            btnDelete.TabIndex = 11;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // label6
             // 
@@ -87,11 +122,13 @@
             // 
             // cmbTrainName
             // 
+            cmbTrainName.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTrainName.FormattingEnabled = true;
             cmbTrainName.Location = new Point(195, 73);
             cmbTrainName.Name = "cmbTrainName";
-            cmbTrainName.Size = new Size(266, 28);
+            cmbTrainName.Size = new Size(223, 28);
             cmbTrainName.TabIndex = 7;
+            cmbTrainName.SelectedIndexChanged += cmbTrainName_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -112,12 +149,13 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(210, 220);
+            btnSave.Location = new Point(312, 251);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 56);
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // label5
             // 
@@ -214,5 +252,8 @@
         private ComboBox cmbTrainName;
         private Label label6;
         private DateTimePicker dtSchaduleTime;
+        private Button btnDelete;
+        private Label lblTrainID;
+        private CheckBox chkIsActive;
     }
 }

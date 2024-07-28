@@ -41,7 +41,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 76);
+            panel1.Size = new Size(800, 80);
             panel1.TabIndex = 5;
             // 
             // label2
@@ -58,11 +58,13 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 76);
+            dataGridView1.Location = new Point(0, 80);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(800, 374);
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(800, 370);
             dataGridView1.TabIndex = 6;
+            dataGridView1.CellMouseDown += dataGridView1_CellMouseDown;
             // 
             // ListOfTrainReport
             // 

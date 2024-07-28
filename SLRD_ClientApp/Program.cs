@@ -1,3 +1,5 @@
+using SLRD_ClientApp.Properties;
+
 namespace SLRD_ClientApp
 {
     internal static class Program
@@ -10,7 +12,7 @@ namespace SLRD_ClientApp
         {
            
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginClient());
+            Application.Run(new HomeScreen());
         }
     }
 }

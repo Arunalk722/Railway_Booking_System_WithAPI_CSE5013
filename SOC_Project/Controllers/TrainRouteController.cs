@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SOC_Project.Class_files;
 using SOC_Project.FunctionFiles;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
@@ -190,7 +191,7 @@ namespace SOC_Project.Controllers
                     {
                   new SqlParameter("@IsActive",true)
                     };
-                    string query = "SELECT * FROM tbl_TrainRoute where IsActive=@IsActive";
+                    string query = "SELECT tr.*,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser where tr.IsActive=@IsActive";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         List<ListOfRoutes> listOfRoutes = new List<ListOfRoutes>();
@@ -205,7 +206,11 @@ namespace SOC_Project.Controllers
                                     TrainID = Convert.ToInt32(dr["TrainID"]),
                                     SourLocation = dr["SourLocation"].ToString(),
                                     DestLocation = dr["DestLocation"].ToString(),
-                                    SchaduleTime = dr["SchaduleTime"].ToString()
+                                    SchaduleTime = dr["SchaduleTime"].ToString(),
+                                    UserName = dr["UserName"].ToString(),
+                                    IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
+                                   
+
                                 });
                             }
                         }
@@ -256,7 +261,7 @@ namespace SOC_Project.Controllers
                     {
                   new SqlParameter("@RouteId",routeID)
                     };
-                    string query = "SELECT * FROM tbl_TrainRoute where RouteId=@RouteId";
+                    string query = "SELECT tr.*,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser where tr.RouteId=@RouteId";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         if (dr.Read())
@@ -268,19 +273,18 @@ namespace SOC_Project.Controllers
                                 TrainID = Convert.ToInt32(dr["TrainID"]),
                                 SourLocation = dr["SourLocation"].ToString(),
                                 DestLocation = dr["DestLocation"].ToString(),
-                                SchaduleTime = dr["SchaduleTime"].ToString()
+                                SchaduleTime = dr["SchaduleTime"].ToString(),
+                               UserName = dr["UserName"].ToString(),
+                                IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
+
                             });
                         }
                         else
                         {
-                            return Ok(new ListOfRoutes
+                            return BadRequest(new StatusMessage
                             {
-                                SCode = 204,
-                                RouteId = 0,
-                                TrainID = 0,
-                                SourLocation = "NA",
-                                DestLocation = "NA",
-                                SchaduleTime = "NA"
+                                SCode = 404,
+                                SMessage = "No data to view"
                             });
                         }
 
@@ -306,24 +310,5 @@ namespace SOC_Project.Controllers
             }
         }
     }
-    public class TrainRoute
-    {
-        public string Token { get; set; }
-        public int TrainId { get; set; }
-        public string SourLocatin { get; set; }
-        public string DestLocation { get; set; }
-        public DateTime SchaduleTime { get; set; }
-        public int CreatedUser { get; set; }
-        public bool IsActive { get; set; }
-    }
 
-    public class ListOfRoutes
-    {
-        public int SCode { get; set; }
-        public int RouteId { get; set; }
-        public int TrainID { get; set; }
-        public string SourLocation { get; set; }
-        public string DestLocation { get; set; }
-        public string SchaduleTime { get; set; }
-    }
 }
