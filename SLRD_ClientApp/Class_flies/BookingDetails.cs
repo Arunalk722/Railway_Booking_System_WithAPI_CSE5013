@@ -9,13 +9,13 @@ namespace SLRD_ClientApp.Class_flies
     public class BookingDetails
     {
         public int BookingID { get; set; }
+        public string TicketID { get; set; }
         public int TraindID { get; set; }
         public int RouteID { get; set; }
         public string PassengerNIC { get; set; }
         public string PasengerName { get; set; }
         public string PhoneNo { get; set; }
-        public string EmailAddress { get; set; }
-        public int RouteCount { get; set; }
+        public string EmailAddress { get; set; }        
         public string FullName { get; set; }
         public DateTime BookDate { get; set; }
         public int BookSeatNo { get; set; }

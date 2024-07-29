@@ -36,17 +36,18 @@ namespace SLRD_ClientApp.Report
 
                 if (responseBody != null)
                 {
-                    var trainRouteList = JsonSerializer.Deserialize<List<BookingDetails>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var bookingLists = JsonSerializer.Deserialize<List<BookingDetails>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                    if (trainRouteList != null)
+                    if (bookingLists != null)
                     {
-                        foreach (var routes in trainRouteList)
+                        foreach (var bookingDt in bookingLists)
                         {
-                            routes.StatusMessage = routes.BookingIsActive ? "Route Active" : "Route Not Active";
+                            bookingDt.StatusMessage = bookingDt.BookingIsActive ? "Booking Active" : "Booking Not Active";
+                            bookingDt.TicketID = bookingDt.BookingID.ToString("D5");
                         }
                         SetupDataGridView();
-                        dataGridView1.DataSource = trainRouteList;
-                        hcs.messageController("Train Info listing successful", "S");
+                        dataGridView1.DataSource = bookingLists;
+                        //  hcs.messageController("Train Info listing successful", "S");
                     }
                 }
                 else
@@ -66,56 +67,151 @@ namespace SLRD_ClientApp.Report
         private void SetupDataGridView()
         {
             dataGridView1.Columns.Clear();
+            var bookingID = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "BookingID",
+                HeaderText = "Booking ID"
+            };
+            dataGridView1.Columns.Add(bookingID);
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
+
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "RouteId",
-                HeaderText = "Route ID"
+                DataPropertyName = "TicketID",
+                HeaderText = "Ticket"
+            });
+
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TraindID",
+                HeaderText = "Traind ID"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "TrainID",
-                HeaderText = "Train Id"
+                DataPropertyName = "RouteID",
+                HeaderText = "Route ID"
+            }); 
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "PassengerNIC",
+                HeaderText = "NIC"
+            }); 
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "PasengerName",
+                HeaderText = "Pasenger Name"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "PhoneNo",
+                HeaderText = "Phone No"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "EmailAddress",
+                HeaderText = "Email Address"
+            });
+           
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "FullName",
+                HeaderText = "Full Name"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "BookDate",
+                HeaderText = "Book Date"
+            }); 
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "BookSeatNo",
+                HeaderText = "Book Seat No"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainName",
                 HeaderText = "Train Name"
-            });
+            }); 
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "SourLocation",
                 HeaderText = "Start Location"
-            });
+            }); 
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "DestLocation",
                 HeaderText = "Destination"
             });
-
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "SchaduleTime",
-                HeaderText = "Time"
+                HeaderText = "Schadule Time"
+
+
+            });
+            var bookRecordTime = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "BookRecordTime",
+                HeaderText = "BookRecord Time"
+            };
+            dataGridView1.Columns.Add(bookRecordTime);
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
+
+
+
+            var bookingIsActive = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "BookingIsActive",
+                HeaderText = "BookingIsActive"
+            };
+            dataGridView1.Columns.Add(bookingIsActive);
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
+          
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "IsTraveled",
+                HeaderText = "Is traveld"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "UserName",
-                HeaderText = "Create User"
+                DataPropertyName = "PassengerIsActive",
+                HeaderText = "PassengerIsActive"
             });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TrainIsActive",
+                HeaderText = "TrainIsActive"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TrainCreatedDate",
+                HeaderText = "TrainCreatedDate"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TrainCreatedUser",
+                HeaderText = "TrainCreatedUser"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "RouteCreatedDate",
+                HeaderText = "RouteCreatedDate"
+            });
+
+
+            var routeIsActive = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "RouteIsActive",
+                HeaderText = "RouteIsActive"
+            };
+            dataGridView1.Columns.Add(routeIsActive);
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
+            
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "StatusMessage",
-                HeaderText = "StatusMessage"
+                HeaderText = "Status Message"
             });
-            var isActiveColumn = new DataGridViewCheckBoxColumn
-            {
-                DataPropertyName = "IsActive",
-                HeaderText = "Is Active"
-            };
-            dataGridView1.Columns.Add(isActiveColumn);
-
-            // Hiding the "Is Active" column
-            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
         }
     }
 }

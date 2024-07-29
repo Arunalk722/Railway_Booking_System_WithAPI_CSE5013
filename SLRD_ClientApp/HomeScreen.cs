@@ -58,26 +58,26 @@ namespace SLRD_ClientApp.Properties
         private void HomeScreen_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
-            messageController($"{SystemFuntion.UserName} {SystemFuntion.UserId} {SystemFuntion.UserRoleID} {SystemFuntion.Email}","S");
+            messageController($"{SystemFuntion.UserName} {SystemFuntion.UserId} {SystemFuntion.UserRoleID} {SystemFuntion.Email}", "S");
         }
 
         private void makeTrainToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MakeTrain makeTrain = new MakeTrain(this,0);
+            MakeTrain makeTrain = new MakeTrain(this, 0);
             makeTrain.MdiParent = this;
             makeTrain.Show();
         }
 
         private void makeRouteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MakeRoute frm = new MakeRoute(this,0);
+            MakeRoute frm = new MakeRoute(this, 0);
             frm.MdiParent = this;
             frm.Show();
         }
 
         private void passengerRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PassengerRegistration frm = new PassengerRegistration(this);
+            PassengerRegistration frm = new PassengerRegistration(this, "0");
             frm.MdiParent = this;
             frm.Show();
         }
@@ -108,6 +108,13 @@ namespace SLRD_ClientApp.Properties
             ListOfRoute frm = new ListOfRoute(this);
             frm.MdiParent = this;
             frm.Show();
+        }
+
+        private void markTicketToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TicketMarking  ticketMarking = new TicketMarking(this);
+            ticketMarking.MdiParent = this;
+            ticketMarking.Show();
         }
     }
 }

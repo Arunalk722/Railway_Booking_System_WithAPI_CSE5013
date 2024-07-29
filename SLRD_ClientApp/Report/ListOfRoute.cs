@@ -113,8 +113,6 @@ namespace SLRD_ClientApp.Report
                 HeaderText = "Is Active"
             };
             dataGridView1.Columns.Add(isActiveColumn);
-
-            // Hiding the "Is Active" column
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
         }
 

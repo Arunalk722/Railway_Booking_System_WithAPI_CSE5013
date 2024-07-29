@@ -41,6 +41,7 @@
             bookingToolStripMenuItem = new ToolStripMenuItem();
             bookingListToolStripMenuItem = new ToolStripMenuItem();
             bookingManagementToolStripMenuItem = new ToolStripMenuItem();
+            markTicketToolStripMenuItem = new ToolStripMenuItem();
             passengerToolStripMenuItem = new ToolStripMenuItem();
             passengerRegistrationToolStripMenuItem = new ToolStripMenuItem();
             bookingToolStripMenuItem1 = new ToolStripMenuItem();
@@ -95,34 +96,34 @@
             // makeTrainToolStripMenuItem
             // 
             makeTrainToolStripMenuItem.Name = "makeTrainToolStripMenuItem";
-            makeTrainToolStripMenuItem.Size = new Size(224, 26);
+            makeTrainToolStripMenuItem.Size = new Size(180, 26);
             makeTrainToolStripMenuItem.Text = "Make Train";
             makeTrainToolStripMenuItem.Click += makeTrainToolStripMenuItem_Click;
             // 
             // makeRouteToolStripMenuItem
             // 
             makeRouteToolStripMenuItem.Name = "makeRouteToolStripMenuItem";
-            makeRouteToolStripMenuItem.Size = new Size(224, 26);
+            makeRouteToolStripMenuItem.Size = new Size(180, 26);
             makeRouteToolStripMenuItem.Text = "Make Route";
             makeRouteToolStripMenuItem.Click += makeRouteToolStripMenuItem_Click;
             // 
             // trainReportToolStripMenuItem
             // 
             trainReportToolStripMenuItem.Name = "trainReportToolStripMenuItem";
-            trainReportToolStripMenuItem.Size = new Size(224, 26);
+            trainReportToolStripMenuItem.Size = new Size(180, 26);
             trainReportToolStripMenuItem.Text = "Train Report";
             trainReportToolStripMenuItem.Click += trainReportToolStripMenuItem_Click;
             // 
             // routeReportToolStripMenuItem
             // 
             routeReportToolStripMenuItem.Name = "routeReportToolStripMenuItem";
-            routeReportToolStripMenuItem.Size = new Size(224, 26);
+            routeReportToolStripMenuItem.Size = new Size(180, 26);
             routeReportToolStripMenuItem.Text = "Route Report";
             routeReportToolStripMenuItem.Click += routeReportToolStripMenuItem_Click;
             // 
             // bookingToolStripMenuItem
             // 
-            bookingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bookingListToolStripMenuItem, bookingManagementToolStripMenuItem });
+            bookingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bookingListToolStripMenuItem, bookingManagementToolStripMenuItem, markTicketToolStripMenuItem });
             bookingToolStripMenuItem.Name = "bookingToolStripMenuItem";
             bookingToolStripMenuItem.Size = new Size(78, 24);
             bookingToolStripMenuItem.Text = "Booking";
@@ -139,6 +140,13 @@
             bookingManagementToolStripMenuItem.Name = "bookingManagementToolStripMenuItem";
             bookingManagementToolStripMenuItem.Size = new Size(239, 26);
             bookingManagementToolStripMenuItem.Text = "Booking Management";
+            // 
+            // markTicketToolStripMenuItem
+            // 
+            markTicketToolStripMenuItem.Name = "markTicketToolStripMenuItem";
+            markTicketToolStripMenuItem.Size = new Size(239, 26);
+            markTicketToolStripMenuItem.Text = "Mark Ticket";
+            markTicketToolStripMenuItem.Click += markTicketToolStripMenuItem_Click;
             // 
             // passengerToolStripMenuItem
             // 
@@ -225,5 +233,6 @@
         private ToolStripMenuItem makeBookingToolStripMenuItem;
         private ToolStripMenuItem trainReportToolStripMenuItem;
         private ToolStripMenuItem routeReportToolStripMenuItem;
+        private ToolStripMenuItem markTicketToolStripMenuItem;
     }
 }

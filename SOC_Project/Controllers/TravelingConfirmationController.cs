@@ -6,7 +6,7 @@ namespace SOC_Project.Controllers
 {
     public class TravelingConfirmationController : Controller
     {
-        [HttpPost]
+        [HttpGet]
         [Route("/BookingConfirm")]
         public IActionResult BookingConfirm(string token, string bookingID)
         {
@@ -23,7 +23,7 @@ namespace SOC_Project.Controllers
                     };
                     using (SqlDataReader dr = SQLConnection.PrmRead("SELECT IsActive,IsTraveled from tbl_Booking where BookingID=@BookingID", checkStatus))
                     {
-                        if (dr!=null)
+                        if (dr!=null&&dr.Read())
                         {
                             if (Convert.ToBoolean(dr["IsActive"]) == true)
                             {

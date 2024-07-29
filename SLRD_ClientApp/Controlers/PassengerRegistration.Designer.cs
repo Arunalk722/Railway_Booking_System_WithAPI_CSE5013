@@ -40,6 +40,7 @@
             label3 = new Label();
             txtEmail = new TextBox();
             txtName = new TextBox();
+            btnDelete = new Button();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnDelete);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(txtPhoneNo);
             groupBox1.Controls.Add(btnSave);
@@ -124,6 +126,7 @@
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // label5
             // 
@@ -159,6 +162,16 @@
             txtName.Size = new Size(266, 27);
             txtName.TabIndex = 3;
             // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(107, 171);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 56);
+            btnDelete.TabIndex = 7;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
             // PassengerRegistration
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -190,5 +203,6 @@
         private Button btnSave;
         private Label label4;
         private TextBox txtPhoneNo;
+        private Button btnDelete;
     }
 }
