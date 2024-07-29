@@ -66,9 +66,11 @@
             groupBox1.Controls.Add(txtSource);
             groupBox1.Controls.Add(txtRouteId);
             groupBox1.Dock = DockStyle.Top;
-            groupBox1.Location = new Point(0, 78);
+            groupBox1.Location = new Point(0, 58);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(490, 352);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(429, 264);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Passenger Info";
@@ -76,9 +78,10 @@
             // chkIsActive
             // 
             chkIsActive.AutoSize = true;
-            chkIsActive.Location = new Point(195, 204);
+            chkIsActive.Location = new Point(171, 153);
+            chkIsActive.Margin = new Padding(3, 2, 3, 2);
             chkIsActive.Name = "chkIsActive";
-            chkIsActive.Size = new Size(86, 24);
+            chkIsActive.Size = new Size(70, 19);
             chkIsActive.TabIndex = 13;
             chkIsActive.Text = "Is Active";
             chkIsActive.UseVisualStyleBackColor = true;
@@ -86,17 +89,18 @@
             // lblTrainID
             // 
             lblTrainID.AutoSize = true;
-            lblTrainID.Location = new Point(419, 77);
+            lblTrainID.Location = new Point(367, 58);
             lblTrainID.Name = "lblTrainID";
-            lblTrainID.Size = new Size(24, 20);
+            lblTrainID.Size = new Size(18, 15);
             lblTrainID.TabIndex = 12;
             lblTrainID.Text = "ID";
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(172, 251);
+            btnDelete.Location = new Point(150, 188);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(94, 56);
+            btnDelete.Size = new Size(82, 42);
             btnDelete.TabIndex = 11;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -105,9 +109,9 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(107, 178);
+            label6.Location = new Point(94, 134);
             label6.Name = "label6";
-            label6.Size = new Size(42, 20);
+            label6.Size = new Size(33, 15);
             label6.TabIndex = 10;
             label6.Text = "Time";
             // 
@@ -115,43 +119,47 @@
             // 
             dtSchaduleTime.CustomFormat = "HH:mm:ss";
             dtSchaduleTime.Format = DateTimePickerFormat.Custom;
-            dtSchaduleTime.Location = new Point(195, 171);
+            dtSchaduleTime.Location = new Point(171, 128);
+            dtSchaduleTime.Margin = new Padding(3, 2, 3, 2);
             dtSchaduleTime.Name = "dtSchaduleTime";
-            dtSchaduleTime.Size = new Size(125, 27);
+            dtSchaduleTime.Size = new Size(110, 23);
             dtSchaduleTime.TabIndex = 9;
             // 
             // cmbTrainName
             // 
             cmbTrainName.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTrainName.FormattingEnabled = true;
-            cmbTrainName.Location = new Point(195, 73);
+            cmbTrainName.Location = new Point(171, 55);
+            cmbTrainName.Margin = new Padding(3, 2, 3, 2);
             cmbTrainName.Name = "cmbTrainName";
-            cmbTrainName.Size = new Size(223, 28);
+            cmbTrainName.Size = new Size(196, 23);
             cmbTrainName.TabIndex = 7;
             cmbTrainName.SelectedIndexChanged += cmbTrainName_SelectedIndexChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(107, 141);
+            label4.Location = new Point(94, 106);
             label4.Name = "label4";
-            label4.Size = new Size(85, 20);
+            label4.Size = new Size(67, 15);
             label4.TabIndex = 5;
             label4.Text = "Destination";
             // 
             // txtDestination
             // 
-            txtDestination.Location = new Point(195, 138);
+            txtDestination.Location = new Point(171, 104);
+            txtDestination.Margin = new Padding(3, 2, 3, 2);
             txtDestination.MaxLength = 10;
             txtDestination.Name = "txtDestination";
-            txtDestination.Size = new Size(266, 27);
+            txtDestination.Size = new Size(233, 23);
             txtDestination.TabIndex = 6;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(312, 251);
+            btnSave.Location = new Point(273, 188);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(94, 56);
+            btnSave.Size = new Size(82, 42);
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -160,72 +168,77 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(107, 110);
+            label5.Location = new Point(94, 82);
             label5.Name = "label5";
-            label5.Size = new Size(54, 20);
+            label5.Size = new Size(43, 15);
             label5.TabIndex = 2;
             label5.Text = "Source";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(107, 77);
+            label3.Location = new Point(94, 58);
             label3.Name = "label3";
-            label3.Size = new Size(41, 20);
+            label3.Size = new Size(32, 15);
             label3.TabIndex = 2;
             label3.Text = "Train";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(107, 44);
+            label1.Location = new Point(94, 33);
             label1.Name = "label1";
-            label1.Size = new Size(65, 20);
+            label1.Size = new Size(51, 15);
             label1.TabIndex = 2;
             label1.Text = "Route Id";
             // 
             // txtSource
             // 
-            txtSource.Location = new Point(195, 107);
+            txtSource.Location = new Point(171, 80);
+            txtSource.Margin = new Padding(3, 2, 3, 2);
             txtSource.MaxLength = 50;
             txtSource.Name = "txtSource";
-            txtSource.Size = new Size(266, 27);
+            txtSource.Size = new Size(233, 23);
             txtSource.TabIndex = 3;
             // 
             // txtRouteId
             // 
-            txtRouteId.Location = new Point(195, 41);
+            txtRouteId.Location = new Point(171, 31);
+            txtRouteId.Margin = new Padding(3, 2, 3, 2);
             txtRouteId.MaxLength = 12;
             txtRouteId.Name = "txtRouteId";
-            txtRouteId.Size = new Size(141, 27);
+            txtRouteId.Size = new Size(124, 23);
             txtRouteId.TabIndex = 3;
+            txtRouteId.KeyDown += txtRouteId_KeyDown;
             // 
             // panel1
             // 
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(490, 78);
+            panel1.Size = new Size(429, 58);
             panel1.TabIndex = 6;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(172, 19);
+            label2.Location = new Point(150, 14);
             label2.Name = "label2";
-            label2.Size = new Size(175, 38);
+            label2.Size = new Size(136, 30);
             label2.TabIndex = 3;
             label2.Text = "Make Route";
             // 
             // MakeRoute
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(490, 442);
+            ClientSize = new Size(429, 332);
             Controls.Add(groupBox1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MakeRoute";
             Text = "MakeRoute";
             Load += MakeRoute_Load;

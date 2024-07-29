@@ -29,6 +29,7 @@ namespace SLRD_ClientApp.Controlers
             if (routeId != 0)
             {
                 txtRouteId.Text = routeId.ToString();
+                getRouteDetails(routeId);
             }
             else
             {
@@ -91,10 +92,10 @@ namespace SLRD_ClientApp.Controlers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-         //   int trainIDOnly = Convert.ToInt16(txtRouteId.Text);
+
             if (routeId != 0)
             {
-                if (txtDestination.Text.Length > 2 && txtSource.Text.Length > 2 && lblTrainID.Text.Length > 1)
+                if (txtDestination.Text.Length > 2 && txtSource.Text.Length > 2 && int.TryParse(lblTrainID.Text, out int resu))
                 {
                     if (MessageBox.Show($"do you confirm to update train Route Id {routeId}", "update Train Route", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -132,53 +133,52 @@ namespace SLRD_ClientApp.Controlers
 
         private async void updateRoute()
         {
-
             try
             {
+
                 TrainRoute make = new TrainRoute
                 {
                     Token = SystemFuntion.Token,
                     CreatedUser = SystemFuntion.UserId,
                     DestLocation = txtDestination.Text,
                     SourLocatin = txtSource.Text,
-                    SchaduleTime = DateTime.Now,
+                    SchaduleTime = dtSchaduleTime.Text,
                     TrainId = Convert.ToInt32(lblTrainID.Text),
                     IsActive = chkIsActive.Checked,
                 };
-
-                var responseBody = await APICalling.PutMethodCalling($"/UpdateRoute?routeId={routeId}", make);
+                string callURL = $"/UpdateRoute?routeId={routeId}";
+                var responseBody = await APICalling.PutMethodCalling(callURL, make);
 
                 if (responseBody != null)
                 {
                     using (JsonDocument doc = JsonDocument.Parse(responseBody))
                     {
                         JsonElement root = doc.RootElement;
-                        int sCode = Convert.ToInt16(root.GetProperty("sCode").GetInt16());
-                        hcs.messageController($"{root.GetProperty("sMessage").ToString()}", sCode == 200 ? "S" : "I");
+                        int sCode = root.GetProperty("sCode").GetInt16();
+                        hcs.messageController($"{root.GetProperty("sMessage")}", sCode == 200 ? "S" : "I");
                         if (sCode == 200)
                         {
-
-
+                            txtRouteId.Text = "";
                             txtDestination.Text = "";
                             txtSource.Text = "";
+                            cmbTrainName.SelectedIndex = 0;
                             lblTrainID.Text = "";
                             chkIsActive.Checked = false;
-
+                            routeId = 0;
                         }
                     }
                 }
                 else
                 {
-                    hcs.messageController("An error occurred while updating route train.", "E");
+                    hcs.messageController("An error occurred while updating the train route.", "E");
                 }
-
             }
             catch (Exception ex)
             {
                 hcs.messageController(ex.Message, "E");
-
             }
         }
+
 
         private async void insertRoute()
         {
@@ -190,12 +190,13 @@ namespace SLRD_ClientApp.Controlers
                     CreatedUser = SystemFuntion.UserId,
                     DestLocation = txtDestination.Text,
                     SourLocatin = txtSource.Text,
-                    SchaduleTime = DateTime.Now,
+                    SchaduleTime = dtSchaduleTime.Text,
                     TrainId = Convert.ToInt32(lblTrainID.Text),
                     IsActive = chkIsActive.Checked,
                 };
 
-                var responseBody = await APICalling.PutMethodCalling("/UpdateTrain", make);
+                var responseBody = await APICalling.PostMethodCalling("/CreateRoute", make);
+                MessageBox.Show(responseBody.ToString());
                 if (responseBody != null)
                 {
                     using (JsonDocument doc = JsonDocument.Parse(responseBody))
@@ -228,7 +229,117 @@ namespace SLRD_ClientApp.Controlers
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            insertRoute();
+            if (int.TryParse(txtRouteId.Text, out int resu))
+            {
+                if (MessageBox.Show("You'd you like to remove selected train from database?", "Delete Train", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    deleteTrain();
+                }
+                else
+                {
+                    hcs.messageController($"not confirm to  delete train Id {resu}", "I");
+                }
+            }
+            else { hcs.messageController("please check train id", "I"); }
+        }
+        private async void deleteTrain()
+        {
+            try
+            {
+                string url = $"/DeleteRoute?token={System.Web.HttpUtility.UrlEncode(SystemFuntion.Token)}&RouteId={routeId}";
+
+                string responseBody = await APICalling.DeleteMethodCalling(url);
+
+                if (responseBody != null)
+                {
+                    using (JsonDocument doc = JsonDocument.Parse(responseBody))
+                    {
+                        JsonElement root = doc.RootElement;
+                        if (Convert.ToInt16(root.GetProperty("sCode").GetInt16()) == 200)
+                        {
+                            txtRouteId.Text = "";
+                            txtDestination.Text = "";
+                            txtSource.Text = "";
+                            cmbTrainName.SelectedIndex = 0;
+                            lblTrainID.Text = "";
+                            chkIsActive.Checked = false;
+                            routeId = 0;
+                            hcs.messageController(root.GetProperty("sMessage").ToString(), "S");
+                        }
+                        else
+                        {
+                            hcs.messageController("Error Deleting train", "I");
+                        }
+                    }
+                }
+                else
+                {
+                    hcs.messageController("Error: No response from server.", "E");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}");
+            }
+        }
+
+        private void txtRouteId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if(int.TryParse(txtRouteId.Text, out routeId))
+                {
+                    getRouteDetails(routeId);
+                }
+                e.Handled = true;
+            }
+        }
+
+        private async void getRouteDetails(int routeIds)
+        {
+            try
+            {
+                string url = $"/ViewOneRoute?token={System.Web.HttpUtility.UrlEncode(SystemFuntion.Token)}&routeID={routeIds}";
+                string responseBody = await APICalling.GetMethodCalling(url);
+                hcs.messageController(url, "S");
+                if (responseBody != null)
+                {
+                    using (JsonDocument doc = JsonDocument.Parse(responseBody))
+                    {
+                        JsonElement root = doc.RootElement;
+                        if (Convert.ToInt16(root.GetProperty("sCode").GetInt16()) == 200)
+                        {               
+                        
+                            txtDestination.Text = root.GetProperty("destLocation").ToString();
+                            txtSource.Text = root.GetProperty("sourLocation").ToString();
+                            cmbTrainName.SelectedText = root.GetProperty("trainName").ToString();
+                            lblTrainID.Text = root.GetProperty("trainID").ToString();
+                            chkIsActive.Checked = Convert.ToBoolean(root.GetProperty("isActive").ToString());
+                           
+                            hcs.messageController("Train Info finding successful", "S");
+                        }
+                        else
+                        {
+                            txtRouteId.Text = "";
+                            txtDestination.Text = "";
+                            txtSource.Text = "";
+                            cmbTrainName.SelectedIndex = 0;
+                            lblTrainID.Text = "";
+                            chkIsActive.Checked = false;
+                            routeId = 0;
+                            hcs.messageController("Error finding train result", "I");
+                        }
+                    }
+                }
+                else
+                {
+                    hcs.messageController("Error: No response from server.", "E");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}");
+            }
         }
     }
 }

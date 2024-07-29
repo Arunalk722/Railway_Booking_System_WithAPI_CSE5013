@@ -78,6 +78,11 @@ namespace SLRD_ClientApp.Report
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
+                DataPropertyName = "TrainName",
+                HeaderText = "Train Name"
+            });
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            {
                 DataPropertyName = "SourLocation",
                 HeaderText = "Start Location"
             });
@@ -102,7 +107,15 @@ namespace SLRD_ClientApp.Report
                 DataPropertyName = "StatusMessage",
                 HeaderText = "StatusMessage"
             });
-          
+            var isActiveColumn = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "IsActive",
+                HeaderText = "Is Active"
+            };
+            dataGridView1.Columns.Add(isActiveColumn);
+
+            // Hiding the "Is Active" column
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)

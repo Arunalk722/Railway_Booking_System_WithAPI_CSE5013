@@ -67,7 +67,7 @@ namespace SOC_Project.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("/UpdateRoute")]
         public IActionResult UpdateTrainRoute(TrainRoute routeData,int routeId)
         {
@@ -191,7 +191,7 @@ namespace SOC_Project.Controllers
                     {
                   new SqlParameter("@IsActive",true)
                     };
-                    string query = "SELECT tr.*,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser where tr.IsActive=@IsActive";
+                    string query = "SELECT tr.*,tl.TrainName,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser join tbl_TrainList as tl on tl.TrainId=tr.TrainID";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         List<ListOfRoutes> listOfRoutes = new List<ListOfRoutes>();
@@ -209,7 +209,7 @@ namespace SOC_Project.Controllers
                                     SchaduleTime = dr["SchaduleTime"].ToString(),
                                     UserName = dr["UserName"].ToString(),
                                     IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
-                                   
+                                    TrainName = dr["TrainName"].ToString(),
 
                                 });
                             }
@@ -261,7 +261,7 @@ namespace SOC_Project.Controllers
                     {
                   new SqlParameter("@RouteId",routeID)
                     };
-                    string query = "SELECT tr.*,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser where tr.RouteId=@RouteId";
+                    string query = "SELECT tr.*,tl.TrainName,ul.UserName FROM tbl_TrainRoute as tr join tbl_UserList as ul on ul.UserID=tr.CreatedUser join tbl_TrainList as tl on tl.TrainId=tr.TrainID";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
                         if (dr.Read())
@@ -274,9 +274,9 @@ namespace SOC_Project.Controllers
                                 SourLocation = dr["SourLocation"].ToString(),
                                 DestLocation = dr["DestLocation"].ToString(),
                                 SchaduleTime = dr["SchaduleTime"].ToString(),
-                               UserName = dr["UserName"].ToString(),
+                                UserName = dr["UserName"].ToString(),
                                 IsActive = Convert.ToBoolean(dr["IsActive"].ToString()),
-
+                                TrainName= dr["TrainName"].ToString(),
                             });
                         }
                         else

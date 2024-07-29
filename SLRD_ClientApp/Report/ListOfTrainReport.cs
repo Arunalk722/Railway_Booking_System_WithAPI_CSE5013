@@ -41,7 +41,7 @@ namespace SLRD_ClientApp.Report
                     {
                         foreach (var train in trainList)
                         {
-                            train.StatusMessage = train.IsActive ? "Train Active" : "Train Not Active";
+                            train.StatusMessage = train.IsActive ? "Train is Active" : "Train Not Active";
                         }
                         SetupDataGridView();
                         dataGridView1.DataSource = trainList;
@@ -67,6 +67,9 @@ namespace SLRD_ClientApp.Report
         private void SetupDataGridView()
         {
             dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Clear();
+
+            // Adding columns
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainId",
@@ -77,16 +80,20 @@ namespace SLRD_ClientApp.Report
                 DataPropertyName = "TrainName",
                 HeaderText = "Train Name"
             });
-            dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                DataPropertyName = "IsActive",
-                HeaderText = "Is Active"
-            });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "StatusMessage",
                 HeaderText = "Status Message"
             });
+            var isActiveColumn = new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "IsActive",
+                HeaderText = "Is Active"
+            };
+            dataGridView1.Columns.Add(isActiveColumn);
+
+            // Hiding the "Is Active" column
+            dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)

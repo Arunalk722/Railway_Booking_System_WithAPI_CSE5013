@@ -9,7 +9,7 @@
         public int TrainId { get; set; }
         public string SourLocatin { get; set; }
         public string DestLocation { get; set; }
-        public DateTime SchaduleTime { get; set; }
+        public string SchaduleTime { get; set; }
         public int CreatedUser { get; set; }
         public bool IsActive { get; set; }
     }
@@ -19,6 +19,7 @@
         public int SCode { get; set; }
         public int RouteId { get; set; }
         public int TrainID { get; set; }
+        public string TrainName { get; set; }
         public string SourLocation { get; set; }
         public string DestLocation { get; set; }
         public string SchaduleTime { get; set; }

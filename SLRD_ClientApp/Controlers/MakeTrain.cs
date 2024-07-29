@@ -170,7 +170,7 @@ namespace SLRD_ClientApp.Controlers
             }
             else
             {
-                if(txtTrainId.Text.Length>1&&txtTrainName.Text.Length>2)
+                if(int.TryParse(txtTrainId.Text,out int res)&&txtTrainName.Text.Length>2)
                 {
                     if (MessageBox.Show($"do you confirm to update train Id {trainId}", "Add new Train", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -217,14 +217,15 @@ namespace SLRD_ClientApp.Controlers
                         JsonElement root = doc.RootElement;
                         if (Convert.ToInt16(root.GetProperty("sCode").GetInt16()) == 200)
                         {
+                            txtTrainId.Text = "";
+                            txtTrainName.Text = "";
+                            chkIsActive.Checked = false;
+                           
 
                             hcs.messageController(root.GetProperty("sMessage").ToString(), "S");
                         }
                         else
                         {
-                            txtTrainId.Text = "";
-                            txtTrainName.Text = "";
-                            chkIsActive.Checked = false;
                             hcs.messageController("Error Deleting train", "I");
                         }
                     }
@@ -251,6 +252,7 @@ namespace SLRD_ClientApp.Controlers
                 {
                     getTrainDetails();
                 }
+                e.Handled = true;
             }
         }
     }
