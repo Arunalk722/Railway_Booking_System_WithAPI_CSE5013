@@ -9,12 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
+using System.Text.Json;
+using SLRD_ClientApp.Class_flies;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 namespace SLRD_ClientApp.Controlers
 {
     public partial class MakeBooking : Form
     {
         public HomeScreen hcs;
-        static HttpClient client=new HttpClient();
+        static HttpClient client = new HttpClient();
         public MakeBooking(HomeScreen home)
         {
             InitializeComponent();
@@ -29,15 +32,62 @@ namespace SLRD_ClientApp.Controlers
             hcs.messageController("", "S");
             DisableSeat();
             EnableSeat(10);
-            EnableSeat(5);
-            EnableSeat(20);
+
+            _ = dropDownList();
+        }
+        private async Task dropDownList()
+        {
+            try
+            {
+                string url = $"/ViewAllRoute?Token={System.Web.HttpUtility.UrlEncode(SystemFuntion.Token)}";
+                var responseBody = await APICalling.GetMethodCalling(url);
+
+                if (responseBody != null)
+                {
+                    var routeInfo = JsonSerializer.Deserialize<List<RouteInfoWithTrainId>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (routeInfo != null)
+                    {
+                        foreach (var train in routeInfo)
+                        {
+                            RouteInfoWithTrainId trainInfo = new RouteInfoWithTrainId
+                            {
+                                RouteId = train.RouteId,
+                                destLocation = train.destLocation,
+                                sourLocation = train.sourLocation,
+                                TrainId = train.TrainId,
+                                TrainName = train.TrainName
+                            };
+
+                            cmbRoute.Items.Add(trainInfo);
+                        }
+                    }
+                }
+                else
+                {
+                    hcs.messageController("Failed to get train information", "E");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                hcs.messageController("Error: " + e.Message, "E");
+            }
+            catch (Exception ex)
+            {
+                hcs.messageController("An unexpected error occurred: " + ex.Message, "E");
+            }
+        }
+        private void cmbRoute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbRoute.SelectedItem is RouteInfoWithTrainId selectedRoute)
+            {
+                txtTrainName.Text = selectedRoute.TrainName;
+                lblTrainId.Text = selectedRoute.TrainId.ToString();
+                lblRouteId.Text = selectedRoute.RouteId.ToString();
+                _ = getSeatInfo();
+            }
         }
 
-        private void btnS1_Click(object sender, EventArgs e)
-        {
-          
-            
-        }
         void DisableSeat()
         {
             btnS1.Enabled = false;
@@ -62,98 +112,304 @@ namespace SLRD_ClientApp.Controlers
             btnS20.Enabled = false;
             btnS21.Enabled = false;
         }
+        void enableAllSeats()
+        {
+            btnS1.Enabled = true;
+            btnS2.Enabled = true;
+            btnS3.Enabled = true;
+            btnS4.Enabled = true;
+            btnS5.Enabled = true;
+            btnS6.Enabled = true;
+            btnS7.Enabled = true;
+            btnS8.Enabled = true;
+            btnS9.Enabled = true;
+            btnS10.Enabled = true;
+            btnS11.Enabled = true;
+            btnS12.Enabled = true;
+            btnS13.Enabled = true;
+            btnS14.Enabled = true;
+            btnS15.Enabled = true;
+            btnS16.Enabled = true;
+            btnS17.Enabled = true;
+            btnS18.Enabled = true;
+            btnS19.Enabled = true;
+            btnS20.Enabled = true;
+            btnS21.Enabled = true;
+        }
         void EnableSeat(int seatNo)
         {
-            if (seatNo == 1)
+            switch (seatNo)
             {
-                btnS1.Enabled = true;
+                case 1: btnS1.Enabled = false; break;
+                case 2: btnS2.Enabled = false; break;
+                case 3: btnS3.Enabled = false; break;
+                case 4: btnS4.Enabled = false; break;
+                case 5: btnS5.Enabled = false; break;
+                case 6: btnS6.Enabled = false; break;
+                case 7: btnS7.Enabled = false; break;
+                case 8: btnS8.Enabled = false; break;
+                case 9: btnS9.Enabled = false; break;
+                case 10: btnS10.Enabled = false; break;
+                case 11: btnS11.Enabled = false; break;
+                case 12: btnS12.Enabled = false; break;
+                case 13: btnS13.Enabled = false; break;
+                case 14: btnS14.Enabled = false; break;
+                case 15: btnS15.Enabled = false; break;
+                case 16: btnS16.Enabled = false; break;
+                case 17: btnS17.Enabled = false; break;
+                case 18: btnS18.Enabled = false; break;
+                case 19: btnS19.Enabled = false; break;
+                case 20: btnS20.Enabled = false; break;
+                case 21: btnS21.Enabled = false; break;
+                default: hcs.messageController($"Unknown seat number: {seatNo}", "E"); break;
             }
-            if (seatNo == 2)
-            {
-                btnS2.Enabled = true;
-
-            }
-            if (seatNo == 3)
-            {
-                btnS3.Enabled = true;
-            }
-            if (seatNo == 4)
-            {
-                btnS4.Enabled = true;
-
-            }
-            if (seatNo == 5)
-            {
-
-                btnS5.Enabled = true;
-            }
-            if (seatNo == 6)
-            {
-                btnS6.Enabled = true;
-            }
-            if (seatNo == 7)
-            {
-                btnS7.Enabled = true;
-            }
-            if (seatNo == 8)
-            {
-                btnS8.Enabled = true;
-
-            }
-            if (seatNo == 9)
-            {
-                btnS9.Enabled = true;
-            }
-            if (seatNo == 10)
-            {
-                btnS10.Enabled = true;
-            }
-            if (seatNo == 11)
-            {
-                btnS11.Enabled = true;
-            }
-            if (seatNo == 12)
-            {
-                btnS12.Enabled = true;
-            }
-            if (seatNo == 13)
-            {
-                btnS13.Enabled = true;
-            }
-            if (seatNo == 14)
-            {
-                btnS14.Enabled = true;
-            }
-            if (seatNo == 15)
-            {
-                btnS15.Enabled = true;
-            }
-            if (seatNo == 16)
-            {
-                btnS16.Enabled = true;
-            }
-            if (seatNo == 17)
-            {
-                btnS17.Enabled = true;
-            }
-            if (seatNo == 18)
-            {
-                btnS18.Enabled = true;
-            }
-            if (seatNo == 19)
-            {
-                btnS19.Enabled = true;
-            }
-            if (seatNo == 20)
-            {
-                btnS20.Enabled = true;
-            }
-            if (seatNo == 21)
-            {
-                btnS21.Enabled = true;
-
-            }
-
         }
+
+        void disableSeat(int seatNo)
+        {
+            switch (seatNo)
+            {
+                case 1: btnS1.Enabled = false; break;
+                case 2: btnS2.Enabled = false; break;
+                case 3: btnS3.Enabled = false; break;
+                case 4: btnS4.Enabled = false; break;
+                case 5: btnS5.Enabled = false; break;
+                case 6: btnS6.Enabled = false; break;
+                case 7: btnS7.Enabled = false; break;
+                case 8: btnS8.Enabled = false; break;
+                case 9: btnS9.Enabled = false; break;
+                case 10: btnS10.Enabled = false; break;
+                case 11: btnS11.Enabled = false; break;
+                case 12: btnS12.Enabled = false; break;
+                case 13: btnS13.Enabled = false; break;
+                case 14: btnS14.Enabled = false; break;
+                case 15: btnS15.Enabled = false; break;
+                case 16: btnS16.Enabled = false; break;
+                case 17: btnS17.Enabled = false; break;
+                case 18: btnS18.Enabled = false; break;
+                case 19: btnS19.Enabled = false; break;
+                case 20: btnS20.Enabled = false; break;
+                case 21: btnS21.Enabled = false; break;
+                default: hcs.messageController($"Unknown seat number: {seatNo}", "E"); break;
+            }
+        }
+        private void btnValidate_Click(object sender, EventArgs e)
+        {
+            _ = getSeatInfo();
+        }
+
+        private void dtPickDate_ValueChanged(object sender, EventArgs e)
+        {
+            _ = getSeatInfo();
+        }
+        private async Task getSeatInfo()
+        {
+            try
+            {
+                DisableSeat();
+                enableAllSeats();
+                string url = $"/GetBookedSeatNo?Token={System.Web.HttpUtility.UrlEncode(SystemFuntion.Token)}&trainID={lblTrainId.Text}&routeID={lblRouteId.Text}&bookingDate={dtPickDate.Text}";
+                var responseBody = await APICalling.GetMethodCalling(url);
+
+                if (responseBody != null)
+                {
+                    groupBox3.Enabled = true;
+                    var seatInfo = JsonSerializer.Deserialize<List<SeatNoListing>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (seatInfo != null)
+                    {
+                        foreach (var seat in seatInfo)
+                        {
+                            EnableSeat(seat.BookSeatNo);
+                        }
+                    }
+                    hcs.messageController("Already bookied seats disable and other seat will enable", "S");
+                }
+                else
+                {
+                    hcs.messageController("Failed to get train information", "E");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                hcs.messageController("Error: " + e.Message, "E");
+            }
+            catch (Exception ex)
+            {
+                hcs.messageController("An unexpected error occurred: " + ex.Message, "E");
+            }
+        }
+
+        private async void makeNewBooking(int sNumber)
+        {
+            try
+            {
+                TraingBookingReqBody make = new TraingBookingReqBody
+                {
+                    Token = SystemFuntion.Token,
+                    BookDate = dtPickDate.Text,
+                    BookSeatNo = sNumber,
+                    NIC = txtNIC.Text,
+                    PasengerName = txtName.Text,
+                    RouteID = Convert.ToInt32(lblRouteId.Text),
+                    TrainID = Convert.ToInt32(lblTrainId.Text),
+                };
+
+                var responseBody = await APICalling.PostMethodCalling("/MakeBooking", make);
+                if (responseBody != null)
+                {
+                    using (JsonDocument doc = JsonDocument.Parse(responseBody))
+                    {
+                        JsonElement root = doc.RootElement;
+                        int sCode = Convert.ToInt16(root.GetProperty("sCode").GetInt16());
+                        hcs.messageController($"{root.GetProperty("sMessage")}", sCode == 200 ? "S" : "I");
+                        if (sCode == 200)
+                        {
+                            disableSeat(sNumber);
+                        }
+                    }
+                }
+                else
+                {
+                    hcs.messageController("An error occurred while updating the train route.", "E");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                hcs.messageController(ex.Message, "E");
+
+            }
+        }
+        void validateInput(int sNumber)
+        {
+            if (txtNIC.Text.Length < 10)
+            {
+                hcs.messageController("Please add NIC", "I");
+            }
+            else if (txtName.Text.Length < 5)
+            {
+                hcs.messageController("Please add Name", "I");
+            }
+            else if (!int.TryParse(lblRouteId.Text, out int res1))
+            {
+                hcs.messageController("Please select route", "I");
+            }
+            else if (!int.TryParse(lblTrainId.Text, out int res2))
+            {
+                hcs.messageController("Please select route", "I");
+
+            }
+            else
+            {
+                makeNewBooking(sNumber);
+            }
+        }
+
+        private void btnS1_Click(object sender, EventArgs e)
+        {
+            validateInput(1);
+        }
+
+        private void btnS2_Click(object sender, EventArgs e)
+        {
+            validateInput(2);
+        }
+
+        private void btnS3_Click(object sender, EventArgs e)
+        {
+            validateInput(3);
+        }
+        private void btnS4_Click(object sender, EventArgs e)
+        {
+            validateInput(4);
+        }
+
+        private void btnS5_Click(object sender, EventArgs e)
+        {
+            validateInput(5);
+        }
+
+        private void btnS6_Click(object sender, EventArgs e)
+        {
+            validateInput(6);
+        }
+
+        private void btnS7_Click(object sender, EventArgs e)
+        {
+            validateInput(7);
+        }
+
+        private void btnS8_Click(object sender, EventArgs e)
+        {
+            validateInput(8);
+        }
+
+        private void btnS9_Click(object sender, EventArgs e)
+        {
+            validateInput(9);
+        }
+
+        private void btnS10_Click(object sender, EventArgs e)
+        {
+            validateInput(10);
+        }
+
+        private void btnS11_Click(object sender, EventArgs e)
+        {
+            validateInput(11);
+        }
+
+        private void btnS12_Click(object sender, EventArgs e)
+        {
+            validateInput(12);
+        }
+
+        private void btnS13_Click(object sender, EventArgs e)
+        {
+            validateInput(13);
+        }
+
+        private void btnS14_Click(object sender, EventArgs e)
+        {
+            validateInput(14);
+        }
+
+        private void btnS15_Click(object sender, EventArgs e)
+        {
+            validateInput(15);
+        }
+
+        private void btnS16_Click(object sender, EventArgs e)
+        {
+            validateInput(16);
+        }
+
+        private void btnS17_Click(object sender, EventArgs e)
+        {
+            validateInput(17);
+        }
+
+        private void btnS18_Click(object sender, EventArgs e)
+        {
+            validateInput(18);
+        }
+
+        private void btnS19_Click(object sender, EventArgs e)
+        {
+            validateInput(19);
+        }
+
+        private void btnS20_Click(object sender, EventArgs e)
+        {
+            validateInput(20);
+        }
+
+        private void btnS21_Click(object sender, EventArgs e)
+        {
+            validateInput(21);
+        }
+
+      
     }
 }

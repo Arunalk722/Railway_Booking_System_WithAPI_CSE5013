@@ -9,11 +9,11 @@ namespace SOC_Project.Controllers
     [ApiController]
     public class SeatListingController : Controller
     {
-        [HttpPost]
+        [HttpGet]
         [Route("/GetBookedSeatNo")]
-        public IActionResult Index(CheckLocationRBody rBody)
+        public IActionResult Index(string token,int trainID,int routeID,string bookingDate)
         {
-            if (!WebTokenValidate.TokenValidateing(rBody.Token))
+            if (!WebTokenValidate.TokenValidateing(token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -27,11 +27,11 @@ namespace SOC_Project.Controllers
                 {
                     List<TakedSeatList> setList = new List<TakedSeatList>();
                     SqlParameter[] checkLocation = new SqlParameter[] {
-                    new SqlParameter("@TraindID",rBody.TrainID),
-                    new SqlParameter("@RouteID",rBody.RouteID),
-                    new SqlParameter("@BookDate",rBody.BookingDate.ToDateTime(new TimeOnly(0, 0)))
+                    new SqlParameter("@TraindID",trainID),
+                    new SqlParameter("@RouteID",routeID),
+                    new SqlParameter("@BookDate",bookingDate)
                     };
-                    using(SqlDataReader dr = SQLConnection.PrmRead("SELECT BookSeatNo FROM tbl_Booking where TraindID=@TraindID and RouteID=@RouteID and BookTime=@BookTime and BookDate=@BookDate", checkLocation))
+                    using(SqlDataReader dr = SQLConnection.PrmRead("SELECT BookSeatNo FROM tbl_Booking where TraindID=@TraindID and RouteID=@RouteID and BookDate=@BookDate", checkLocation))
                     {
                         if (dr != null)
                         {
@@ -40,6 +40,7 @@ namespace SOC_Project.Controllers
                                 setList.Add(
                                     new TakedSeatList
                                     {
+                                        sCode=200,
                                         BookSeatNo = Convert.ToInt32(dr["BookSeatNo"])
                                     });
                             }

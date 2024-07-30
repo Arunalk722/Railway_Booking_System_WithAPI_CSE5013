@@ -36,7 +36,7 @@ namespace SLRD_ClientApp
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     var response = await client.PostAsJsonAsync(requestUrl, content);
-                    response.EnsureSuccessStatusCode();
+                  //  response.EnsureSuccessStatusCode();
 
                     return await response.Content.ReadAsStringAsync();
                 }

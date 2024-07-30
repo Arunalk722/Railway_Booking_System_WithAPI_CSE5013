@@ -34,4 +34,19 @@ namespace SLRD_ClientApp.Class_flies
         public bool RouteIsActive { get; set; }
        public  string StatusMessage { get; set; }
     }
+    public class TraingBookingReqBody
+    {
+        public string Token { get; set; }
+        public int TrainID { get; set; }
+        public int RouteID { get; set; }
+        public string NIC { get; set; }
+        public string PasengerName { get; set; }
+        public string BookDate { get; set; }
+        public int BookSeatNo { get; set; }
+    }
+    public class SeatNoListing
+    {
+        public int BookSeatNo { get; set; }
+    }
+
 }

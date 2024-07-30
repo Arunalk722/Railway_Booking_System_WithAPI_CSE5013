@@ -34,4 +34,19 @@ namespace SLRD_ClientApp.Class_flies
         public string StatusMessage {  get; set; }
      
     }
+
+
+    public class RouteInfoWithTrainId
+    {
+        public int TrainId { get; set; }
+        public string TrainName { get; set; }
+        public int RouteId { get; set; }
+        public string sourLocation { get; set; }
+        public string destLocation { get; set; }
+        public override string ToString()
+        {
+            return $"{sourLocation}-{destLocation}{RouteId}::{TrainId}::{TrainName}";
+        }
+    }
+
 }

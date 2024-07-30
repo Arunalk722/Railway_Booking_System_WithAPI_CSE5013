@@ -54,7 +54,7 @@ namespace SLRD_ClientApp.Controlers
         }
         void validate()
         {
-            if (txtNic.Text.Length <= 9)
+            if (txtNic.Text.Length <= 8)
             {
                 hcs.messageController("Please check NIC", "I");
             }

@@ -42,8 +42,9 @@ namespace SLRD_ClientApp.Report
                     {
                         foreach (var bookingDt in bookingLists)
                         {
-                            bookingDt.StatusMessage = bookingDt.BookingIsActive ? "Booking Active" : "Booking Not Active";
+                          //  bookingDt.StatusMessage = bookingDt.BookingIsActive ? "Booking Active" : "Booking Not Active";
                             bookingDt.TicketID = bookingDt.BookingID.ToString("D5");
+                            bookingDt.StatusMessage = bookingDt.IsTraveled ? "ticket closed" : "ticket activated";
                         }
                         SetupDataGridView();
                         dataGridView1.DataSource = bookingLists;
