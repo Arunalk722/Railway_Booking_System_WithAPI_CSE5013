@@ -40,17 +40,18 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 80);
+            panel1.Size = new Size(700, 60);
             panel1.TabIndex = 5;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(52, 18);
+            label2.Location = new Point(46, 14);
             label2.Name = "label2";
-            label2.Size = new Size(179, 38);
+            label2.Size = new Size(141, 30);
             label2.TabIndex = 3;
             label2.Text = "Train Report";
             // 
@@ -58,21 +59,24 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 80);
+            dataGridView1.Location = new Point(0, 60);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(800, 370);
+            dataGridView1.Size = new Size(700, 278);
             dataGridView1.TabIndex = 6;
             dataGridView1.CellMouseDown += dataGridView1_CellMouseDown;
             // 
             // ListOfTrainReport
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ListOfTrainReport";
             Text = "ListOfTrainReport";
             Load += ListOfTrainReport_Load;

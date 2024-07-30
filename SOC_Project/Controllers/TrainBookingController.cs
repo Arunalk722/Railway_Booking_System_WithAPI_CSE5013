@@ -45,10 +45,12 @@ namespace SOC_Project.Controllers
                             string query = "INSERT INTO [dbo].[tbl_Booking] ([BookingID],[TraindID], [RouteID], [PassengerNIC], [BookDate], [PasengerName], [BookSeatNo], [EnterDate], [IsActive], [IsTraveled]) VALUES (@BookingID,@TraindID, @RouteID, @PassengerNIC, @BookDate, @PasengerName, @BookSeatNo, @EnterDate, @IsActive, @IsTraveled)";
                             if (SQLConnection.PrmWrite(query, sqlParameters))
                             {
-                                return Ok(new StatusMessage
+                                return Ok(new StatusMessageBooking
                                 {
                                     SCode = 200,
+                                    TktNo = bookingId.ToString("D5"),
                                     SMessage = $"New booking was add booking ref: {bookingId.ToString("D5")}"
+
                                 });
                             }
                             else

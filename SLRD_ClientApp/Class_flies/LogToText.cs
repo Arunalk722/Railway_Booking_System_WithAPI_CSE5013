@@ -15,7 +15,7 @@ namespace SLRD_ClientApp.Class_flies
                 String yy = DateTime.Now.ToString("yyyy");
                 String dd = DateTime.Now.ToString("dd");
                 String mm = DateTime.Now.ToString("MM");
-                String _errorLogPath = "d:/SOCApp/error/exception/" + yy + "/" + mm + "/" + dd;
+                String _errorLogPath = "d:/SOCClient/error/exception/" + yy + "/" + mm + "/" + dd;
 
                 String message = exception.GetType().Name.ToString();
                 String logLine = exception.StackTrace.Substring(exception.StackTrace.Length - 7, 7);

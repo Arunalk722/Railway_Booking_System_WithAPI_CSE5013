@@ -24,7 +24,7 @@ namespace SLRD_ClientApp.Report
 
         private void ListOfBookingInformation_Load(object sender, EventArgs e)
         {
-            CallAPI();
+            _ = CallAPI();
 
         }
         private async Task CallAPI()
@@ -53,7 +53,7 @@ namespace SLRD_ClientApp.Report
                 }
                 else
                 {
-                    hcs.messageController("Failed to get train information", "E");
+                    hcs.messageController("Failed to get train booking information", "E");
                 }
             }
             catch (HttpRequestException e)
@@ -126,7 +126,7 @@ namespace SLRD_ClientApp.Report
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "BookSeatNo",
-                HeaderText = "Book Seat No"
+                HeaderText = "Seat No"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -163,7 +163,7 @@ namespace SLRD_ClientApp.Report
             var bookingIsActive = new DataGridViewCheckBoxColumn
             {
                 DataPropertyName = "BookingIsActive",
-                HeaderText = "BookingIsActive"
+                HeaderText = "Booking Active"
             };
             dataGridView1.Columns.Add(bookingIsActive);
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
@@ -176,34 +176,34 @@ namespace SLRD_ClientApp.Report
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "PassengerIsActive",
-                HeaderText = "PassengerIsActive"
+                HeaderText = "Passenger Active"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainIsActive",
-                HeaderText = "TrainIsActive"
+                HeaderText = "Train Is Active"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainCreatedDate",
-                HeaderText = "TrainCreatedDate"
+                HeaderText = "Train Created Date"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainCreatedUser",
-                HeaderText = "TrainCreatedUser"
+                HeaderText = "Train Created User"
             });
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "RouteCreatedDate",
-                HeaderText = "RouteCreatedDate"
+                HeaderText = "Route Created Date"
             });
 
 
             var routeIsActive = new DataGridViewCheckBoxColumn
             {
                 DataPropertyName = "RouteIsActive",
-                HeaderText = "RouteIsActive"
+                HeaderText = "Route Is Active"
             };
             dataGridView1.Columns.Add(routeIsActive);
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;

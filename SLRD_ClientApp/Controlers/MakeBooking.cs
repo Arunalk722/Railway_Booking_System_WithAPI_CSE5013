@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text.Json;
 using SLRD_ClientApp.Class_flies;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Drawing.Printing;
 namespace SLRD_ClientApp.Controlers
 {
     public partial class MakeBooking : Form
@@ -23,6 +24,10 @@ namespace SLRD_ClientApp.Controlers
             InitializeComponent();
             hcs = home;
         }
+        string srcLoc;string destLoc;
+        int setNo;
+        string ticketNo;
+        string bookTime;
         void callApi()
         {
             client.BaseAddress = new Uri("");
@@ -32,7 +37,6 @@ namespace SLRD_ClientApp.Controlers
             hcs.messageController("", "S");
             DisableSeat();
             EnableSeat(10);
-
             _ = dropDownList();
         }
         private async Task dropDownList()
@@ -53,10 +57,11 @@ namespace SLRD_ClientApp.Controlers
                             RouteInfoWithTrainId trainInfo = new RouteInfoWithTrainId
                             {
                                 RouteId = train.RouteId,
-                                destLocation = train.destLocation,
-                                sourLocation = train.sourLocation,
+                                DestLocation = train.DestLocation,
+                                SourLocation = train.SourLocation,
                                 TrainId = train.TrainId,
-                                TrainName = train.TrainName
+                                TrainName = train.TrainName,
+                                SchaduleTime=train.SchaduleTime,
                             };
 
                             cmbRoute.Items.Add(trainInfo);
@@ -65,7 +70,7 @@ namespace SLRD_ClientApp.Controlers
                 }
                 else
                 {
-                    hcs.messageController("Failed to get train information", "E");
+                    hcs.messageController("Failed to get route information", "E");
                 }
             }
             catch (HttpRequestException e)
@@ -84,6 +89,9 @@ namespace SLRD_ClientApp.Controlers
                 txtTrainName.Text = selectedRoute.TrainName;
                 lblTrainId.Text = selectedRoute.TrainId.ToString();
                 lblRouteId.Text = selectedRoute.RouteId.ToString();
+                srcLoc = selectedRoute.SourLocation;
+                destLoc = selectedRoute.DestLocation;
+                bookTime = selectedRoute.SchaduleTime;
                 _ = getSeatInfo();
             }
         }
@@ -223,11 +231,11 @@ namespace SLRD_ClientApp.Controlers
                             EnableSeat(seat.BookSeatNo);
                         }
                     }
-                    hcs.messageController("Already bookied seats disable and other seat will enable", "S");
+                    hcs.messageController("Already booked seats disable and other seat will enable", "S");
                 }
                 else
                 {
-                    hcs.messageController("Failed to get train information", "E");
+                    hcs.messageController("Failed to get booking information", "E");
                 }
             }
             catch (HttpRequestException e)
@@ -266,12 +274,17 @@ namespace SLRD_ClientApp.Controlers
                         if (sCode == 200)
                         {
                             disableSeat(sNumber);
+                            ticketNo = root.GetProperty("tktNo").ToString();
+                            setNo= sNumber;
+                            printPreviewDialog1.Document = printDocument1;
+                            printDocument1.DefaultPageSettings.PaperSize = new PaperSize("SIZE", 380, 300);
+                            printPreviewDialog1.ShowDialog();
                         }
                     }
                 }
                 else
                 {
-                    hcs.messageController("An error occurred while updating the train route.", "E");
+                    hcs.messageController("An error occurred while making the booking.", "E");
                 }
 
             }
@@ -410,6 +423,47 @@ namespace SLRD_ClientApp.Controlers
             validateInput(21);
         }
 
-      
+       
+
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                string fontName = "Arial";
+                int headerFontSize = 14;
+                int titleFontSize = 18;
+                int bodyFontSize = 12;
+                int footerFontSize = 10;              
+                string currentTime = DateTime.Now.ToString();
+                        
+
+                // Ticket Header
+                e.Graphics.DrawString("Train Ticket", new Font(fontName, titleFontSize, FontStyle.Bold), Brushes.Black, new PointF(10, 20)); // Adjusted Y position
+                e.Graphics.DrawString($"Ticket No: {ticketNo}", new Font(fontName, headerFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 80));
+                e.Graphics.DrawString($"Book Date: {dtPickDate.Text}", new Font(fontName, headerFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 100));
+                e.Graphics.DrawString($"Book Time: {bookTime}", new Font(fontName, headerFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 120));               
+                e.Graphics.DrawString($"Train: {txtTrainName.Text}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 140));
+                e.Graphics.DrawString($"Passenger: {txtName.Text}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 160));
+                e.Graphics.DrawString($"From: {srcLoc}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 180));
+                e.Graphics.DrawString($"To: {destLoc}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 200));
+                e.Graphics.DrawString($"Seat No: {setNo}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 220));
+
+                // QR Code Image
+                Bitmap qrCode = TicketBarcodeCreator.GenerateCode128Barcode(ticketNo);
+                if (qrCode != null)
+                {
+                    e.Graphics.DrawImage(qrCode, new Rectangle(200, 10, 150, 70));
+                }
+
+                // Footer
+                e.Graphics.DrawString($"Thank you for traveling with us!\n{currentTime}", new Font(fontName, footerFontSize, FontStyle.Italic), Brushes.Black, new PointF(10, 240));
+            }
+            catch (Exception ex)
+            {
+                LogToText.ExceptionLog(ex);
+            }
+        }
+
     }
 }

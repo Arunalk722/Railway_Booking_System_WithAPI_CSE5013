@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeBooking));
             groupBox1 = new GroupBox();
             txtName = new TextBox();
             label7 = new Label();
@@ -68,6 +69,8 @@
             btnS2 = new Button();
             panel2 = new Panel();
             label6 = new Label();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             panel1.SuspendLayout();
@@ -86,7 +89,7 @@
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(708, 88);
+            groupBox1.Size = new Size(553, 88);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Passenger Identification";
@@ -95,9 +98,9 @@
             // 
             txtName.Location = new Point(112, 55);
             txtName.Margin = new Padding(3, 2, 3, 2);
-            txtName.MaxLength = 12;
+            txtName.MaxLength = 20;
             txtName.Name = "txtName";
-            txtName.Size = new Size(124, 23);
+            txtName.Size = new Size(213, 23);
             txtName.TabIndex = 5;
             // 
             // label7
@@ -154,7 +157,7 @@
             groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(708, 113);
+            groupBox2.Size = new Size(553, 113);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Booking";
@@ -164,18 +167,18 @@
             lblRouteId.AutoSize = true;
             lblRouteId.Location = new Point(446, 36);
             lblRouteId.Name = "lblRouteId";
-            lblRouteId.Size = new Size(18, 15);
+            lblRouteId.Size = new Size(0, 15);
             lblRouteId.TabIndex = 10;
-            lblRouteId.Text = "ID";
+            lblRouteId.Visible = false;
             // 
             // lblTrainId
             // 
             lblTrainId.AutoSize = true;
             lblTrainId.Location = new Point(446, 62);
             lblTrainId.Name = "lblTrainId";
-            lblTrainId.Size = new Size(18, 15);
+            lblTrainId.Size = new Size(0, 15);
             lblTrainId.TabIndex = 9;
-            lblTrainId.Text = "ID";
+            lblTrainId.Visible = false;
             // 
             // label5
             // 
@@ -241,7 +244,7 @@
             panel1.Location = new Point(0, 259);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(708, 251);
+            panel1.Size = new Size(553, 186);
             panel1.TabIndex = 2;
             // 
             // groupBox3
@@ -273,7 +276,7 @@
             groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(708, 251);
+            groupBox3.Size = new Size(553, 186);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Seat Number";
@@ -516,7 +519,7 @@
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(708, 58);
+            panel2.Size = new Size(553, 58);
             panel2.TabIndex = 5;
             // 
             // label6
@@ -529,11 +532,25 @@
             label6.TabIndex = 3;
             label6.Text = "Make Booking";
             // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
+            // 
             // MakeBooking
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(566, 510);
+            ClientSize = new Size(553, 445);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
@@ -595,5 +612,7 @@
         private Label lblRouteId;
         private TextBox txtName;
         private Label label7;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }

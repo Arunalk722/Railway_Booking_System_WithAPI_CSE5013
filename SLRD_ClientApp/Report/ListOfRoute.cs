@@ -46,12 +46,12 @@ namespace SLRD_ClientApp.Report
                         }
                         SetupDataGridView();
                         dataGridView1.DataSource = trainRouteList;
-                        hcs.messageController("Train Info listing successful", "S");
+                        hcs.messageController("Train route Info listing successful", "S");
                     }
                 }
                 else
                 {
-                    hcs.messageController("Failed to get train information", "E");
+                    hcs.messageController("Failed to get train route information", "E");
                 }
             }
             catch (HttpRequestException e)

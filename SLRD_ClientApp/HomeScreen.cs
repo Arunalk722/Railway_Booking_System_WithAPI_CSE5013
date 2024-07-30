@@ -112,9 +112,16 @@ namespace SLRD_ClientApp.Properties
 
         private void markTicketToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TicketMarking  ticketMarking = new TicketMarking(this);
+            TicketMarking ticketMarking = new TicketMarking(this);
             ticketMarking.MdiParent = this;
             ticketMarking.Show();
+        }
+
+       private void passengerListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           PassengerList passengerList = new PassengerList(this);
+            passengerList.MdiParent = this;
+            passengerList.Show();
         }
     }
 }

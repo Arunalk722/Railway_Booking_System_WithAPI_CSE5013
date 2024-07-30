@@ -40,7 +40,6 @@
             routeReportToolStripMenuItem = new ToolStripMenuItem();
             bookingToolStripMenuItem = new ToolStripMenuItem();
             bookingListToolStripMenuItem = new ToolStripMenuItem();
-            bookingManagementToolStripMenuItem = new ToolStripMenuItem();
             markTicketToolStripMenuItem = new ToolStripMenuItem();
             passengerToolStripMenuItem = new ToolStripMenuItem();
             passengerRegistrationToolStripMenuItem = new ToolStripMenuItem();
@@ -49,6 +48,7 @@
             errprvSuccessMessage = new ErrorProvider(components);
             errprvErrorMessage = new ErrorProvider(components);
             errprvInfoMessage = new ErrorProvider(components);
+            passengerListToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errprvSuccessMessage).BeginInit();
@@ -60,18 +60,17 @@
             // 
             panel1.Controls.Add(lblMessage);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 548);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(0, 411);
             panel1.Name = "panel1";
-            panel1.Size = new Size(914, 52);
+            panel1.Size = new Size(800, 39);
             panel1.TabIndex = 0;
             // 
             // lblMessage
             // 
             lblMessage.AutoSize = true;
-            lblMessage.Location = new Point(37, 17);
+            lblMessage.Location = new Point(32, 13);
             lblMessage.Name = "lblMessage";
-            lblMessage.Size = new Size(67, 20);
+            lblMessage.Size = new Size(53, 15);
             lblMessage.TabIndex = 0;
             lblMessage.Text = "Message";
             // 
@@ -81,70 +80,63 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { trainToolStripMenuItem, bookingToolStripMenuItem, passengerToolStripMenuItem, bookingToolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(914, 30);
+            menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
             // trainToolStripMenuItem
             // 
-            trainToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { makeTrainToolStripMenuItem, makeRouteToolStripMenuItem, trainReportToolStripMenuItem, routeReportToolStripMenuItem });
+            trainToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { makeTrainToolStripMenuItem, makeRouteToolStripMenuItem, trainReportToolStripMenuItem, routeReportToolStripMenuItem, passengerListToolStripMenuItem });
             trainToolStripMenuItem.Name = "trainToolStripMenuItem";
-            trainToolStripMenuItem.Size = new Size(55, 24);
+            trainToolStripMenuItem.Size = new Size(44, 20);
             trainToolStripMenuItem.Text = "Train";
             // 
             // makeTrainToolStripMenuItem
             // 
             makeTrainToolStripMenuItem.Name = "makeTrainToolStripMenuItem";
-            makeTrainToolStripMenuItem.Size = new Size(180, 26);
+            makeTrainToolStripMenuItem.Size = new Size(180, 22);
             makeTrainToolStripMenuItem.Text = "Make Train";
             makeTrainToolStripMenuItem.Click += makeTrainToolStripMenuItem_Click;
             // 
             // makeRouteToolStripMenuItem
             // 
             makeRouteToolStripMenuItem.Name = "makeRouteToolStripMenuItem";
-            makeRouteToolStripMenuItem.Size = new Size(180, 26);
+            makeRouteToolStripMenuItem.Size = new Size(180, 22);
             makeRouteToolStripMenuItem.Text = "Make Route";
             makeRouteToolStripMenuItem.Click += makeRouteToolStripMenuItem_Click;
             // 
             // trainReportToolStripMenuItem
             // 
             trainReportToolStripMenuItem.Name = "trainReportToolStripMenuItem";
-            trainReportToolStripMenuItem.Size = new Size(180, 26);
+            trainReportToolStripMenuItem.Size = new Size(180, 22);
             trainReportToolStripMenuItem.Text = "Train Report";
             trainReportToolStripMenuItem.Click += trainReportToolStripMenuItem_Click;
             // 
             // routeReportToolStripMenuItem
             // 
             routeReportToolStripMenuItem.Name = "routeReportToolStripMenuItem";
-            routeReportToolStripMenuItem.Size = new Size(180, 26);
+            routeReportToolStripMenuItem.Size = new Size(180, 22);
             routeReportToolStripMenuItem.Text = "Route Report";
             routeReportToolStripMenuItem.Click += routeReportToolStripMenuItem_Click;
             // 
             // bookingToolStripMenuItem
             // 
-            bookingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bookingListToolStripMenuItem, bookingManagementToolStripMenuItem, markTicketToolStripMenuItem });
+            bookingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bookingListToolStripMenuItem, markTicketToolStripMenuItem });
             bookingToolStripMenuItem.Name = "bookingToolStripMenuItem";
-            bookingToolStripMenuItem.Size = new Size(78, 24);
+            bookingToolStripMenuItem.Size = new Size(63, 20);
             bookingToolStripMenuItem.Text = "Booking";
             // 
             // bookingListToolStripMenuItem
             // 
             bookingListToolStripMenuItem.Name = "bookingListToolStripMenuItem";
-            bookingListToolStripMenuItem.Size = new Size(239, 26);
+            bookingListToolStripMenuItem.Size = new Size(180, 22);
             bookingListToolStripMenuItem.Text = "Booking List";
             bookingListToolStripMenuItem.Click += bookingListToolStripMenuItem_Click;
-            // 
-            // bookingManagementToolStripMenuItem
-            // 
-            bookingManagementToolStripMenuItem.Name = "bookingManagementToolStripMenuItem";
-            bookingManagementToolStripMenuItem.Size = new Size(239, 26);
-            bookingManagementToolStripMenuItem.Text = "Booking Management";
             // 
             // markTicketToolStripMenuItem
             // 
             markTicketToolStripMenuItem.Name = "markTicketToolStripMenuItem";
-            markTicketToolStripMenuItem.Size = new Size(239, 26);
+            markTicketToolStripMenuItem.Size = new Size(180, 22);
             markTicketToolStripMenuItem.Text = "Mark Ticket";
             markTicketToolStripMenuItem.Click += markTicketToolStripMenuItem_Click;
             // 
@@ -152,13 +144,13 @@
             // 
             passengerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { passengerRegistrationToolStripMenuItem });
             passengerToolStripMenuItem.Name = "passengerToolStripMenuItem";
-            passengerToolStripMenuItem.Size = new Size(88, 24);
+            passengerToolStripMenuItem.Size = new Size(72, 20);
             passengerToolStripMenuItem.Text = "Passenger";
             // 
             // passengerRegistrationToolStripMenuItem
             // 
             passengerRegistrationToolStripMenuItem.Name = "passengerRegistrationToolStripMenuItem";
-            passengerRegistrationToolStripMenuItem.Size = new Size(241, 26);
+            passengerRegistrationToolStripMenuItem.Size = new Size(193, 22);
             passengerRegistrationToolStripMenuItem.Text = "Passenger Registration";
             passengerRegistrationToolStripMenuItem.Click += passengerRegistrationToolStripMenuItem_Click;
             // 
@@ -166,13 +158,13 @@
             // 
             bookingToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { makeBookingToolStripMenuItem });
             bookingToolStripMenuItem1.Name = "bookingToolStripMenuItem1";
-            bookingToolStripMenuItem1.Size = new Size(78, 24);
+            bookingToolStripMenuItem1.Size = new Size(63, 20);
             bookingToolStripMenuItem1.Text = "Booking";
             // 
             // makeBookingToolStripMenuItem
             // 
             makeBookingToolStripMenuItem.Name = "makeBookingToolStripMenuItem";
-            makeBookingToolStripMenuItem.Size = new Size(187, 26);
+            makeBookingToolStripMenuItem.Size = new Size(180, 22);
             makeBookingToolStripMenuItem.Text = "Make Booking";
             makeBookingToolStripMenuItem.Click += makeBookingToolStripMenuItem_Click;
             // 
@@ -190,15 +182,21 @@
             errprvInfoMessage.ContainerControl = this;
             errprvInfoMessage.Icon = (Icon)resources.GetObject("errprvInfoMessage.Icon");
             // 
+            // passengerListToolStripMenuItem
+            // 
+            passengerListToolStripMenuItem.Name = "passengerListToolStripMenuItem";
+            passengerListToolStripMenuItem.Size = new Size(180, 22);
+            passengerListToolStripMenuItem.Text = "Passenger List";
+            passengerListToolStripMenuItem.Click += passengerListToolStripMenuItem_Click;
+            // 
             // HomeScreen
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "HomeScreen";
             Text = "HomeScreen";
             Load += HomeScreen_Load;
@@ -222,7 +220,6 @@
         private ToolStripMenuItem makeRouteToolStripMenuItem;
         private ToolStripMenuItem bookingToolStripMenuItem;
         private ToolStripMenuItem bookingListToolStripMenuItem;
-        private ToolStripMenuItem bookingManagementToolStripMenuItem;
         private Label lblMessage;
         private ErrorProvider errprvSuccessMessage;
         private ErrorProvider errprvErrorMessage;
@@ -234,5 +231,6 @@
         private ToolStripMenuItem trainReportToolStripMenuItem;
         private ToolStripMenuItem routeReportToolStripMenuItem;
         private ToolStripMenuItem markTicketToolStripMenuItem;
+        private ToolStripMenuItem passengerListToolStripMenuItem;
     }
 }

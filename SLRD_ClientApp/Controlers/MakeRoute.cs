@@ -316,7 +316,7 @@ namespace SLRD_ClientApp.Controlers
                             lblTrainID.Text = root.GetProperty("trainID").ToString();
                             chkIsActive.Checked = Convert.ToBoolean(root.GetProperty("isActive").ToString());
                            
-                            hcs.messageController("Train Info finding successful", "S");
+                            hcs.messageController("route Info finding successful", "S");
                         }
                         else
                         {
@@ -327,7 +327,7 @@ namespace SLRD_ClientApp.Controlers
                             lblTrainID.Text = "";
                             chkIsActive.Checked = false;
                             routeId = 0;
-                            hcs.messageController("Error finding train result", "I");
+                            hcs.messageController("Error finding route result", "I");
                         }
                     }
                 }

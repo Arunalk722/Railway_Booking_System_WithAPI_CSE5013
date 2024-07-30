@@ -1,6 +1,6 @@
 ﻿namespace SLRD_ClientApp.Report
 {
-    partial class ListOfBookingInformation
+    partial class PassengerList
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(700, 57);
+            panel1.Size = new Size(800, 60);
             panel1.TabIndex = 6;
             // 
             // label2
@@ -51,33 +51,33 @@
             label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(46, 14);
             label2.Name = "label2";
-            label2.Size = new Size(242, 30);
+            label2.Size = new Size(195, 30);
             label2.TabIndex = 3;
-            label2.Text = "Train Booking Reports";
+            label2.Text = "Passenger Report";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 57);
+            dataGridView1.Location = new Point(0, 60);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(700, 281);
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(800, 390);
             dataGridView1.TabIndex = 7;
             // 
-            // ListOfBookingInformation
+            // PassengerList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 450);
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "ListOfBookingInformation";
-            Text = "ListOfBookingInformation";
-            Load += ListOfBookingInformation_Load;
+            Name = "PassengerList";
+            Text = "PassengerList";
+            Load += PassengerList_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
