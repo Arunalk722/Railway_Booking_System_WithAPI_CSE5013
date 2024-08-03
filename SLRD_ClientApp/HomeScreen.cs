@@ -58,7 +58,19 @@ namespace SLRD_ClientApp.Properties
         private void HomeScreen_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
-            messageController($"{SystemFuntion.UserName} {SystemFuntion.UserId} {SystemFuntion.UserRoleID} {SystemFuntion.Email}", "S");
+            if (SystemFuntion.UserRole == "controlling center")
+            {
+
+            }
+            else if (SystemFuntion.UserRole == "Auditor")
+            {
+                trainToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                trainToolStripMenuItem.Visible = false;
+                bookingToolStripMenuItem.Visible = false;
+            }
         }
 
         private void makeTrainToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,7 +138,7 @@ namespace SLRD_ClientApp.Properties
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+
 
         }
     }
