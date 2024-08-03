@@ -12,7 +12,7 @@ namespace SOC_Project.Controllers
         [Route("GetListOfBooking")]
         public IActionResult GetListOfBooking(string token/*, int? bookingID = null, string nic = null*/)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new { SCode = 401, SMessage = "Unauthorized token" });
             }
@@ -82,7 +82,7 @@ namespace SOC_Project.Controllers
 
                     using (SqlDataReader reader = SQLConnection.PrmRead(SQLQuery, sqlParameters.ToArray())) 
                     { 
-                        Console.WriteLine(reader.ToString());
+                        
                         if(reader !=null)
                         {
                             while (reader.Read())

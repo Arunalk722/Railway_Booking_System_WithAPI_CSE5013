@@ -1,8 +1,6 @@
 ﻿namespace SOC_Project.Class_files
 {
-    public class TrainClass
-    {
-    }
+  
     public class MakeTrainList
     {
         public string Token { get; set; }

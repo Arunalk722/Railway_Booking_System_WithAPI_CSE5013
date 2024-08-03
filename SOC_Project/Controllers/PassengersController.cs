@@ -13,7 +13,7 @@ namespace SOC_Project.Controllers
         [Route("/CreatePassenger")]
         public IActionResult CreatePassenger(PassengerListReqBody passengerListReqBody)
         {
-            if (WebTokenValidate.TokenValidateing(passengerListReqBody.Token))
+            if (WebTokenValidate.ValidateToken(passengerListReqBody.Token))
             {
                 try
                 {
@@ -37,7 +37,7 @@ namespace SOC_Project.Controllers
                         new SqlParameter("@IsActive",true)
                              };
                             string query = "INSERT INTO [dbo].[Tbl_PassengerList] ([NIC], [FullName], [PhoneNo], [EmailAddress], [RouteCount],[IsActive]) VALUES (@NIC, @FullName, @PhoneNo, @EmailAddress, @RouteCount,@IsActive)";
-                            if (SQLConnection.PrmWrite(query, sqlParameters))
+                            if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                             {
                                 return Ok(new StatusMessage
                                 {
@@ -88,7 +88,7 @@ namespace SOC_Project.Controllers
         [Route("/CheckExsistingPassengers")]
         public IActionResult CheckExsisitngPassenger(string token, string nic)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -149,7 +149,7 @@ namespace SOC_Project.Controllers
         [Route("/ViewAllPassengersList")]
         public IActionResult ListAllPassengers(string token)
         {
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -217,7 +217,7 @@ namespace SOC_Project.Controllers
         public IActionResult DeletePassengers(string token,string nic)
         {
 
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -227,7 +227,7 @@ namespace SOC_Project.Controllers
                     };
                     string query = "DELETE [dbo].[Tbl_PassengerList] WHERE [NIC] = @NIC";
 
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -269,7 +269,7 @@ namespace SOC_Project.Controllers
         [Route("/UpdatePasssengerCount")]
         public IActionResult UpdatePasssenger(string token, string nic,int count)
         {
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -281,7 +281,7 @@ namespace SOC_Project.Controllers
                     };
                     string query = "UPDATE [dbo].[Tbl_PassengerList] SET [RouteCount] = @RouteCount WHERE [NIC] = @NIC";
 
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {

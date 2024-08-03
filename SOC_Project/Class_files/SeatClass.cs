@@ -1,8 +1,6 @@
 ﻿namespace SOC_Project.Class_files
 {
-    public class SeatClass
-    {
-    }
+   
     public class TakedSeatList
     {
         public int sCode { get; set; }

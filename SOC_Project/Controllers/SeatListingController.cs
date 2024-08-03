@@ -11,9 +11,9 @@ namespace SOC_Project.Controllers
     {
         [HttpGet]
         [Route("/GetBookedSeatNo")]
-        public IActionResult Index(string token,int trainID,int routeID,string bookingDate)
+        public IActionResult GetBookedSeats(string token,int trainID,int routeID,string bookingDate)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new StatusMessage
                 {

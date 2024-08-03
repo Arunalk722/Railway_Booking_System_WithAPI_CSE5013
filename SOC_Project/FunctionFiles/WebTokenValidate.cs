@@ -7,7 +7,7 @@ namespace SOC_Project.FunctionFiles
 {
     public class WebTokenValidate
     {
-        public static bool TokenValidateing(string token)
+        public static bool ValidateToken(string token)
         {
             try
             {

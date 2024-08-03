@@ -15,7 +15,7 @@ namespace SOC_Project.Controllers
         [Route("/CreateRoute")]
         public IActionResult CreateTrainRoute(TrainRoute routeData)
         {
-            if (WebTokenValidate.TokenValidateing(routeData.Token))
+            if (WebTokenValidate.ValidateToken(routeData.Token))
             {
                 try
                 {
@@ -30,7 +30,7 @@ namespace SOC_Project.Controllers
                     new SqlParameter("@IsActive",routeData.IsActive)
                     };
                     string query = "INSERT INTO [dbo].[tbl_TrainRoute] ([TrainID] ,[SourLocation] ,[DestLocation] ,[SchaduleTime] ,[CreatedUser] ,[CreatedDate] ,[IsActive]) VALUES (@TrainID, @SourLocation, @DestLocation, @SchaduleTime, @CreatedUser, @CreatedDate, @IsActive)";
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -71,7 +71,7 @@ namespace SOC_Project.Controllers
         [Route("/UpdateRoute")]
         public IActionResult UpdateTrainRoute(TrainRoute routeData,int routeId)
         {
-            if (WebTokenValidate.TokenValidateing(routeData.Token))
+            if (WebTokenValidate.ValidateToken(routeData.Token))
             {
                 try
                 {
@@ -88,7 +88,7 @@ namespace SOC_Project.Controllers
                     };
                     string query = "UPDATE [dbo].[tbl_TrainRoute] SET [TrainID] = @TrainID, [SourLocation] = @SourLocation, [DestLocation] = @DestLocation, [SchaduleTime] = @SchaduleTime, [CreatedUser] = @CreatedUser, [CreatedDate] = @CreatedDate, [IsActive] = @IsActive WHERE [RouteId] = @RouteId";
 
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -131,7 +131,7 @@ namespace SOC_Project.Controllers
         public IActionResult DeleteRoute(string token, int RouteId)
         {
 
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -141,7 +141,7 @@ namespace SOC_Project.Controllers
                     };
                     string query = "DELETE [dbo].[tbl_TrainRoute] WHERE [RouteId] = @RouteId";
 
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -183,7 +183,7 @@ namespace SOC_Project.Controllers
         [Route("/ViewAllRoute")]
         public IActionResult ViewAllRoute(string Token)
         {
-            if (WebTokenValidate.TokenValidateing(Token))
+            if (WebTokenValidate.ValidateToken(Token))
             {
                 try
                 {
@@ -253,7 +253,7 @@ namespace SOC_Project.Controllers
         [Route("/ViewOneRoute")]
         public IActionResult ViewOneRoute(string Token, string routeID)
         {
-            if (WebTokenValidate.TokenValidateing(Token))
+            if (WebTokenValidate.ValidateToken(Token))
             {
                 try
                 {

@@ -18,7 +18,7 @@ namespace SLRD_ClientApp.Controlers
     public partial class MakeBooking : Form
     {
         public HomeScreen hcs;
-        static HttpClient client = new HttpClient();
+
         public MakeBooking(HomeScreen home)
         {
             InitializeComponent();
@@ -28,10 +28,7 @@ namespace SLRD_ClientApp.Controlers
         int setNo;
         string ticketNo;
         string bookTime;
-        void callApi()
-        {
-            client.BaseAddress = new Uri("");
-        }
+    
         private void MakeBooking_Load(object sender, EventArgs e)
         {
             hcs.messageController("", "S");

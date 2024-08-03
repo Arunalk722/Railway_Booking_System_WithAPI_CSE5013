@@ -8,9 +8,9 @@ namespace SOC_Project.Controllers
     {
         [HttpGet]
         [Route("/BookingConfirm")]
-        public IActionResult BookingConfirm(string token, string bookingID)
+        public IActionResult ConfirmBooking(string token, string bookingID)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new { SCode = 401, SMessage = "Unauthorized token" });
             }
@@ -32,7 +32,7 @@ namespace SOC_Project.Controllers
                                     SqlParameter[] confTravel = new SqlParameter[] {
                                         new SqlParameter("@BookingID",bookingID)
                                     };
-                                    if (SQLConnection.PrmWrite("UPDATE tbl_Booking set IsTraveled='true' where BookingID=@BookingID and IsActive='true'", confTravel))
+                                    if (SQLConnection.ExecuteWriteCommand("UPDATE tbl_Booking set IsTraveled='true' where BookingID=@BookingID and IsActive='true'", confTravel))
                                     {
                                         return Ok(new { SCode = 200, SMessage = "Best wishes on your journey.your successful completed booking" });
                                     }

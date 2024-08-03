@@ -11,9 +11,9 @@ namespace SOC_Project.Controllers
     {
         [HttpPost]
         [Route("/CreateTrain")]
-        public IActionResult Index(MakeTrainList makeTrain)
+        public IActionResult CreateTrain(MakeTrainList makeTrain)
         {
-            if (!WebTokenValidate.TokenValidateing(makeTrain.Token))
+            if (!WebTokenValidate.ValidateToken(makeTrain.Token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -32,7 +32,7 @@ namespace SOC_Project.Controllers
                     new SqlParameter("@CreatedDate",DateTime.Now.ToString()),
                    };
                     string query = "INSERT INTO [dbo].[tbl_TrainList] ([TrainName] ,[IsActive] ,[CreatedDate]) VALUES (@TrainName, @IsActive, @CreatedDate)";
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -63,9 +63,9 @@ namespace SOC_Project.Controllers
 
         [HttpPut]
         [Route("/UpdateTrain")]
-        public IActionResult Update(MakeTrainList makeTrain)
+        public IActionResult UpdateTrain(MakeTrainList makeTrain)
         {
-            if (!WebTokenValidate.TokenValidateing(makeTrain.Token))
+            if (!WebTokenValidate.ValidateToken(makeTrain.Token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -85,7 +85,7 @@ namespace SOC_Project.Controllers
                     new SqlParameter("@CreatedDate",DateTime.Now.ToString()),
                    };
                     string query = "update tbl_TrainList set TrainName=@TrainName,IsActive=@IsActive,CreatedDate=@CreatedDate where TrainId=@TrainId";
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {
@@ -119,7 +119,7 @@ namespace SOC_Project.Controllers
         [Route("/ViewAllTrain")]
         public async Task<IActionResult> ViewAllTrain(string token)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -192,7 +192,7 @@ namespace SOC_Project.Controllers
         [Route("/ViewOneTrain")]
         public async Task<IActionResult> ViewOneTrain(string token,int TrainId)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -251,7 +251,7 @@ namespace SOC_Project.Controllers
         [Route("/DeleteTrain")]
         public async Task<IActionResult> DeleteTrain(string token, int TrainId)
         {
-            if (!WebTokenValidate.TokenValidateing(token))
+            if (!WebTokenValidate.ValidateToken(token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -268,7 +268,7 @@ namespace SOC_Project.Controllers
                     new SqlParameter("@TrainId",TrainId),
                    };
                     string query = "delete [tbl_TrainList] where TrainId=@TrainId";
-                    if (SQLConnection.PrmWrite(query, sqlParameters))
+                    if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                     {
                         return Ok(new StatusMessage
                         {

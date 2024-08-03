@@ -1,8 +1,6 @@
 ﻿namespace SOC_Project.Class_files
 {
-    public class PassengerClass
-    {
-    }
+   
     public class PassengerListReqBody
     {
         public string Token { get; set; }

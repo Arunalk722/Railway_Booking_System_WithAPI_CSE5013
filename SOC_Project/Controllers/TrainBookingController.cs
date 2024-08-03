@@ -11,9 +11,9 @@ namespace SOC_Project.Controllers
     {
         [HttpPost]
         [Route("/MakeBooking")]
-        public IActionResult Index(TraingBookingReqBody reqBody)
+        public IActionResult MakeBooking(TrainBookingReqBody reqBody)
         {
-            if (!WebTokenValidate.TokenValidateing(reqBody.Token))
+            if (!WebTokenValidate.ValidateToken(reqBody.Token))
             {
                 return Unauthorized(new StatusMessage
                 {
@@ -25,7 +25,7 @@ namespace SOC_Project.Controllers
             {
                 try
                 {
-                    if (checkMaxBookingCount(reqBody.NIC) <= 4) {
+                    if (CheckMaxBookingCount(reqBody.NIC) <= 4) {
                     int bookingId = GetMaxBookingId();
                         if (bookingId > 0)
                         {
@@ -43,7 +43,7 @@ namespace SOC_Project.Controllers
                     new SqlParameter("@IsTraveled",false),
                 };
                             string query = "INSERT INTO [dbo].[tbl_Booking] ([BookingID],[TraindID], [RouteID], [PassengerNIC], [BookDate], [PasengerName], [BookSeatNo], [EnterDate], [IsActive], [IsTraveled]) VALUES (@BookingID,@TraindID, @RouteID, @PassengerNIC, @BookDate, @PasengerName, @BookSeatNo, @EnterDate, @IsActive, @IsTraveled)";
-                            if (SQLConnection.PrmWrite(query, sqlParameters))
+                            if (SQLConnection.ExecuteWriteCommand(query, sqlParameters))
                             {
                                 return Ok(new StatusMessageBooking
                                 {
@@ -132,7 +132,7 @@ namespace SOC_Project.Controllers
         }
 
 
-        int checkMaxBookingCount(string nic)
+        int CheckMaxBookingCount(string nic)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace SOC_Project.Controllers
                 };
                 using (SqlDataReader dr = SQLConnection.PrmRead("select Count(BookingID) FROM tbl_Booking where PassengerNIC=@PassengerNIC and IsActive='true' and IsTraveled='false'", sqlParameters))
                 {
-                    var countRow="";
+                 
                     int count = 0;
                     if (dr!=null&& dr.Read())
                     {                       
@@ -174,7 +174,7 @@ namespace SOC_Project.Controllers
         [Route("/GetListAllOfBooking")]
         public IActionResult GetListOfBooking(string token, bool isActive, bool isTraveled)
         {
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -186,12 +186,12 @@ namespace SOC_Project.Controllers
                     string query = "SELECT * FROM tbl_Booking where IsTraveled=@IsTraveled and IsActive=@IsActive";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
-                        List<TraingBookingList> dataSetList = new List<TraingBookingList>();
+                        List<TrainBookingList> dataSetList = new List<TrainBookingList>();
                         if (dr != null)
                         {
                             while (dr.Read())
                             {
-                                dataSetList.Add(new TraingBookingList
+                                dataSetList.Add(new TrainBookingList
                                 {
                                     SCode = 200,
                                     BookingID = Convert.ToInt32(dr["BookingID"].ToString()),
@@ -254,7 +254,7 @@ namespace SOC_Project.Controllers
         [Route("/GetListAllOfBookingByNic")]
         public IActionResult GetListOfBooking(string token, bool isActive, bool isTraveled, string nic)
         {
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -267,11 +267,11 @@ namespace SOC_Project.Controllers
                     string query = "SELECT * FROM tbl_Booking where IsTraveled=@IsTraveled and IsActive=@IsActive";
                     using (SqlDataReader dr = SQLConnection.PrmRead(query, sqlParameters))
                     {
-                        List<TraingBookingList> dataSetList = new List<TraingBookingList>();
+                        List<TrainBookingList> dataSetList = new List<TrainBookingList>();
                         if (dr != null) {
                             while (dr.Read())
                             {
-                                dataSetList.Add(new TraingBookingList
+                                dataSetList.Add(new TrainBookingList
                                 {
                                     SCode = 200,
                                     BookingID = Convert.ToInt32(dr["BookingID"].ToString()),
@@ -333,7 +333,7 @@ namespace SOC_Project.Controllers
         [Route("/DisableBooking")]
         public IActionResult UpdateBooking(string token, int bookingId, string nic)
         {
-            if (WebTokenValidate.TokenValidateing(token))
+            if (WebTokenValidate.ValidateToken(token))
             {
                 try
                 {
@@ -357,7 +357,7 @@ namespace SOC_Project.Controllers
                                         new SqlParameter("@BookingID",bookingId),
                                         new SqlParameter("@IsActive",false)
                                     };
-                                    if(SQLConnection.PrmWrite("UPDATE tbl_Booking set IsActive=@IsActive where BookingID=@BookingID", updateStatus))
+                                    if(SQLConnection.ExecuteWriteCommand("UPDATE tbl_Booking set IsActive=@IsActive where BookingID=@BookingID", updateStatus))
                                     {
                                         return Ok(new StatusMessage
                                         {

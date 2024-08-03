@@ -1,9 +1,7 @@
 ﻿namespace SOC_Project.Class_files
 {
-    public class TrainBookingClass
-    {
-    }
-    public class TraingBookingReqBody
+  
+    public class TrainBookingReqBody
     {
         public string Token { get; set; }
         public int TrainID { get; set; }
@@ -13,7 +11,7 @@
         public DateOnly BookDate { get; set; }
         public int BookSeatNo { get; set; }
     }
-    public class TraingBookingList
+    public class TrainBookingList
     {
         public int BookingID { get; set; }
         public int SCode { get; set; }

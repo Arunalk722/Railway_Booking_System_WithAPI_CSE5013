@@ -10,16 +10,16 @@ namespace SOC_Project.FunctionFiles
 
         [HttpPost]
         [Route("/UserAuthLogin")]
-        public IActionResult Index(UserAuth userAuthBody)
+        public IActionResult Login(UserAuth userAuthRequest)
         {
-            if (WebTokenValidate.TokenValidateing(userAuthBody.Token))
+            if (WebTokenValidate.ValidateToken(userAuthRequest.Token))
             {
                 try
                 {
                     SqlParameter[] sqlParameters = new SqlParameter[]
                     {
-                    new SqlParameter("@UserName",userAuthBody.UserName),
-                    new SqlParameter("@Pwd",userAuthBody.Pwd),
+                    new SqlParameter("@UserName",userAuthRequest.UserName),
+                    new SqlParameter("@Pwd",userAuthRequest.Pwd),
                   
                     };
                     using(SqlDataReader dr = SQLConnection.PrmRead("SELECT ul.UserID,ul.UserName,ul.Email,ul.UserRole, ur.UserRoleName FROM tbl_UserList AS ul JOIN tbl_UserRoles AS ur ON ul.UserRole = ur.UserRolesId where ul.UserName=@UserName and ul.Pwd=@Pwd;", sqlParameters))
