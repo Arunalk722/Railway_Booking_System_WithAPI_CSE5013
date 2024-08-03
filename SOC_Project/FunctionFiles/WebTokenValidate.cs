@@ -52,8 +52,7 @@ namespace SOC_Project.FunctionFiles
                 }
                 catch (Exception e)
                 {
-                    /* EncryptingExceptionLog.webTokenDecryptError(e, "JSON_Convert");
-                     stateCode = 8;*/
+                
                     return false;
                 }
 
@@ -64,8 +63,7 @@ namespace SOC_Project.FunctionFiles
                 return false;
             }
 
-            //for testing all incoming traffic is allow
-          //  return true;
+            //for testing all incoming traffic is allow       
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SLRD_ClientApp
         {
            
             ApplicationConfiguration.Initialize();
-            Application.Run(new HomeScreen());
+            Application.Run(new LoginClient());
         }
     }
 }

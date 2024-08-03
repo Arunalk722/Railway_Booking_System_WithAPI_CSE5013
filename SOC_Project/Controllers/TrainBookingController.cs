@@ -142,7 +142,8 @@ namespace SOC_Project.Controllers
                 };
                 using (SqlDataReader dr = SQLConnection.PrmRead("select Count(BookingID) FROM tbl_Booking where PassengerNIC=@PassengerNIC and IsActive='true' and IsTraveled='false'", sqlParameters))
                 {
-                 
+
+                    var countRow = "";
                     int count = 0;
                     if (dr!=null&& dr.Read())
                     {                       

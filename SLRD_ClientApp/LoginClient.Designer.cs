@@ -57,7 +57,7 @@
             panel1.Location = new Point(14, 116);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(502, 191);
+            panel1.Size = new Size(502, 219);
             panel1.TabIndex = 0;
             // 
             // button2
@@ -164,7 +164,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(529, 323);
+            ClientSize = new Size(529, 348);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
