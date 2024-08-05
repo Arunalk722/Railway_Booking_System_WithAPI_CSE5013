@@ -54,27 +54,14 @@ namespace SOC_Project.Controllers
         JOIN 
             tbl_TrainRoute AS tr ON bk.RouteID = tr.RouteId
         JOIN 
-            tbl_UserList AS ul ON ul.UserID = tr.CreatedUser"; /*// WHERE 
-                    (bk.BookingID = @BookingID OR @BookingID IS NULL)
-            AND(bk.PassengerNIC = @PassengerNIC OR @PassengerNIC IS NULL)*/
+            tbl_UserList AS ul ON ul.UserID = tr.CreatedUser"; 
+                    
+                    
+                   
 
                     List<SqlParameter> sqlParameters = new List<SqlParameter>();
                     { 
-                        /*  if (bookingID.HasValue)
-                      {
-                          sqlParameters.Add(new SqlParameter("@BookingID", bookingID.Value));
-                      }
-                      else
-                      {
-                          sqlParameters.Add(new SqlParameter("@BookingID", DBNull.Value));
-                      }
 
-                      if (!string.IsNullOrEmpty(nic))
-                      {
-                          sqlParameters.Add(new SqlParameter("@PassengerNIC", nic));
-                      }
-                      else
-                      {*/
                     sqlParameters.Add(new SqlParameter("@PassengerNIC", DBNull.Value));
                     }
 

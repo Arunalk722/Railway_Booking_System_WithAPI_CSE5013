@@ -195,8 +195,7 @@ namespace SLRD_ClientApp.Controlers
                     IsActive = chkIsActive.Checked,
                 };
 
-                var responseBody = await APICalling.PostMethodCalling("/CreateRoute", make);
-                MessageBox.Show(responseBody.ToString());
+                var responseBody = await APICalling.PostMethodCalling("/CreateRoute", make);              
                 if (responseBody != null)
                 {
                     using (JsonDocument doc = JsonDocument.Parse(responseBody))

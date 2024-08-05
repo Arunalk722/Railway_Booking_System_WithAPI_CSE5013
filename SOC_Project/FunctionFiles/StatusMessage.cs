@@ -5,10 +5,9 @@
         public  int SCode { get; set; }
         public  string SMessage { get; set;}
     }
-    public class StatusMessageBooking
+
+    public class StatusMessageBooking : StatusMessage
     {
-        public int SCode { get; set; }
-        public string SMessage { get; set; }
-        public string TktNo {  get; set; } 
+        public string TktNo { get; set; }
     }
 }

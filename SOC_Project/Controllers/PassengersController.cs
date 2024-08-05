@@ -104,8 +104,8 @@ namespace SOC_Project.Controllers
                   {
                     new SqlParameter("@NIC",nic),
                   };
-                    string SQLQuery = "SELECT * FROM Tbl_PassengerList where NIC=@NIC";
-                    using (SqlDataReader dr = SQLConnection.PrmRead(SQLQuery, sqlParameters))
+                    string sqlQuery = "SELECT * FROM Tbl_PassengerList where NIC=@NIC";
+                    using (SqlDataReader dr = SQLConnection.PrmRead(sqlQuery, sqlParameters))
                     {
 
                         if (dr.Read())

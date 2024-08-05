@@ -108,6 +108,7 @@
             txtPwd.Location = new Point(168, 80);
             txtPwd.Margin = new Padding(3, 4, 3, 4);
             txtPwd.Name = "txtPwd";
+            txtPwd.PasswordChar = '*';
             txtPwd.Size = new Size(266, 27);
             txtPwd.TabIndex = 0;
             // 
