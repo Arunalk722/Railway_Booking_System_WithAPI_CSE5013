@@ -189,7 +189,7 @@ namespace SLRD_ClientApp.Controlers
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtTrainId.Text.Length > 1)
+            if (int.TryParse(txtTrainId.Text,out int res))
             {
                 if (MessageBox.Show("You'd you like to remove selected train from database?", "Delete Train", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
