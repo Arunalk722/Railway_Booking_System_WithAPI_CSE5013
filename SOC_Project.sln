@@ -10,6 +10,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLRD_ClientApp", "SLRD_Clie
 		{2D813BBF-E8E6-4E26-8760-1A9CC67B5270} = {2D813BBF-E8E6-4E26-8760-1A9CC67B5270}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8C212AD-65DD-4881-98C4-F3CD65DE3695}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseSchema.txt = DatabaseSchema.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
