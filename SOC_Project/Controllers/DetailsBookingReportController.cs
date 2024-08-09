@@ -61,7 +61,6 @@ namespace SOC_Project.Controllers
 
                     List<SqlParameter> sqlParameters = new List<SqlParameter>();
                     { 
-
                     sqlParameters.Add(new SqlParameter("@PassengerNIC", DBNull.Value));
                     }
 

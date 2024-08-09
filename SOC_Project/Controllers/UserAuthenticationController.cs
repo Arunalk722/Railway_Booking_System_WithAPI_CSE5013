@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SOC_Project.FunctionFiles;
 using System.Data.SqlClient;
 
-namespace SOC_Project.FunctionFiles
+namespace SOC_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,19 +21,20 @@ namespace SOC_Project.FunctionFiles
                     {
                     new SqlParameter("@UserName",userAuthRequest.UserName),
                     new SqlParameter("@Pwd",userAuthRequest.Pwd),
-                  
+
                     };
-                    using(SqlDataReader dr = SQLConnection.PrmRead("SELECT ul.UserID,ul.UserName,ul.Email,ul.UserRole, ur.UserRoleName FROM tbl_UserList AS ul JOIN tbl_UserRoles AS ur ON ul.UserRole = ur.UserRolesId where ul.UserName=@UserName and ul.Pwd=@Pwd;", sqlParameters))
+                    using (SqlDataReader dr = SQLConnection.PrmRead("SELECT ul.UserID,ul.UserName,ul.Email,ul.UserRole, ur.UserRoleName FROM tbl_UserList AS ul JOIN tbl_UserRoles AS ur ON ul.UserRole = ur.UserRolesId where ul.UserName=@UserName and ul.Pwd=@Pwd;", sqlParameters))
                     {
                         if (dr != null)
                         {
-                            if (dr.Read()) { 
+                            if (dr.Read())
+                            {
                                 return Ok(new UserCredentinals
                                 {
-                                    SCode=200,
+                                    SCode = 200,
                                     Email = dr["Email"].ToString(),
                                     UserId = Convert.ToInt32(dr["UserID"]),
-                                    UserName= dr["UserName"].ToString(),
+                                    UserName = dr["UserName"].ToString(),
                                     UserRole = dr["UserRoleName"].ToString(),
                                     UserRoleID = Convert.ToInt32(dr["UserRole"].ToString())
 
@@ -55,12 +57,12 @@ namespace SOC_Project.FunctionFiles
                             return BadRequest(
                                 new StatusMessage
                                 {
-                                    SCode=403,
-                                    SMessage="Login Invalid"
+                                    SCode = 403,
+                                    SMessage = "Login Invalid"
                                 }
                             );
                         }
-                    }                                   
+                    }
 
                 }
                 catch (Exception ex)
@@ -91,13 +93,14 @@ namespace SOC_Project.FunctionFiles
         required public string UserName { get; set; }
         required public string Pwd { get; set; }
     }
-    public class UserCredentinals {
+    public class UserCredentinals
+    {
         public int SCode { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public string Email {  get; set; }
-        public string UserRole {  get; set; }
-        public int UserRoleID {  get; set; }
+        public string Email { get; set; }
+        public string UserRole { get; set; }
+        public int UserRoleID { get; set; }
 
     }
 
