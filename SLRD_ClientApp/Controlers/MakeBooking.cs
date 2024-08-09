@@ -446,14 +446,13 @@ namespace SLRD_ClientApp.Controlers
                 e.Graphics.DrawString($"To: {destLoc}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 200));
                 e.Graphics.DrawString($"Seat No: {setNo}", new Font(fontName, bodyFontSize, FontStyle.Regular), Brushes.Black, new PointF(10, 220));
 
-                // QR Code Image
+          
                 Bitmap qrCode = TicketBarcodeCreator.GenerateCode128Barcode(ticketNo);
                 if (qrCode != null)
                 {
                     e.Graphics.DrawImage(qrCode, new Rectangle(200, 10, 150, 70));
                 }
 
-                // Footer
                 e.Graphics.DrawString($"Thank you for traveling with us!\n{currentTime}", new Font(fontName, footerFontSize, FontStyle.Italic), Brushes.Black, new PointF(10, 240));
             }
             catch (Exception ex)

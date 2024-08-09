@@ -63,7 +63,7 @@ namespace SOC_Project.Controllers
                     return BadRequest(new StatusMessage
                     {
                         SCode = 400, 
-                        SMessage = "An error occurred while creating the booking.Please try again later."
+                        SMessage = "An error occurred while geeting seat no.Please try again later."
                     });
                 }
             }

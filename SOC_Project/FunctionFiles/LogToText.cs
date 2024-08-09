@@ -26,8 +26,7 @@
             }
         }
         catch (Exception ex)
-        {
-            // Consider logging this error to a different file or alerting the developers
+        {            
             Console.WriteLine($"Logging failed: {ex.Message}");
         }
     }

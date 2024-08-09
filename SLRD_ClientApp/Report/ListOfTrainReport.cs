@@ -69,7 +69,7 @@ namespace SLRD_ClientApp.Report
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Clear();
 
-            // Adding columns
+ 
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "TrainId",
@@ -92,7 +92,7 @@ namespace SLRD_ClientApp.Report
             };
             dataGridView1.Columns.Add(isActiveColumn);
 
-            // Hiding the "Is Active" column
+       
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = false;
         }
 
@@ -126,7 +126,7 @@ namespace SLRD_ClientApp.Report
             }
             catch (Exception ex)
             {
-                // Handle the exception appropriately
+             
             }
         }
     }   

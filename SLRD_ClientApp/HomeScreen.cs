@@ -29,7 +29,7 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.ForeColor = Color.Green;
                 errprvSuccessMessage.SetError(lblMessage, text);
                 errprvSuccessMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-                //     LogWritter.messageLog(text, className, docId, "Notification");
+                
             }
             else if (code == "I")
             {
@@ -40,7 +40,7 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.ForeColor = Color.Blue;
                 errprvInfoMessage.SetError(lblMessage, text);
                 errprvInfoMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-                //  LogWritter.messageLog(text, className, docId, "Info");
+          
             }
             else if (code == "E")
             {
@@ -49,8 +49,7 @@ namespace SLRD_ClientApp.Properties
                 lblMessage.Text = text;
                 lblMessage.ForeColor = Color.Red;
                 errprvErrorMessage.SetError(lblMessage, text);
-                errprvErrorMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);
-                //   LogWritter.messageLog(text, className, docId, "Error");
+                errprvErrorMessage.SetIconAlignment(lblMessage, ErrorIconAlignment.MiddleRight);              
 
             }
 

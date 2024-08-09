@@ -10,7 +10,7 @@ namespace SOC_Project.Controllers
     {
         [HttpGet]
         [Route("GetListOfBooking")]
-        public IActionResult GetListOfBooking(string token/*, int? bookingID = null, string nic = null*/)
+        public IActionResult GetListOfBooking(string token)
         {
             if (!WebTokenValidate.ValidateToken(token))
             {

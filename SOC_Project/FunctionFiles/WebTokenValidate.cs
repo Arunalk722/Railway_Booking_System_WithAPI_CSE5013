@@ -61,9 +61,7 @@ namespace SOC_Project.FunctionFiles
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return false;
-            }
-
-            //for testing all incoming traffic is allow       
+            }              
         }
     }
 }

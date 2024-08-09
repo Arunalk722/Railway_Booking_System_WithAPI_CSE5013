@@ -146,7 +146,7 @@ namespace SLRD_ClientApp.Report
             }
             catch (Exception ex)
             {
-                // Handle the exception appropriately
+              
             }
         }
     }
