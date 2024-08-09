@@ -6,7 +6,7 @@ namespace SOC_Project.FunctionFiles
     public class SQLConnection
     {
       
-        public static string connURL = "Data Source=.,1433;Initial Catalog=SOC_TrainfDB;Persist Security Info=True;User ID=sa;Password=T32NBQDBA23;Max Pool Size=99999;Pooling=true;Connection Timeout=30;";
+        public static string connURL = "Data Source=.,1433;Initial Catalog=SOC_TrainfDB;Persist Security Info=True;User ID=sa;Password=Icbt@123;Max Pool Size=99999;Pooling=true;Connection Timeout=30;";
         public static bool ExecuteWriteCommand(string sqlQuery, SqlParameter[] sqlParameters)     
         {
             try
