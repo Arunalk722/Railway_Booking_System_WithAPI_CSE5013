@@ -40,6 +40,7 @@
             panel2 = new Panel();
             label2 = new Label();
             label1 = new Label();
+            linkToBooking = new LinkLabel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -47,6 +48,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(linkToBooking);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(label4);
@@ -161,6 +163,17 @@
             label1.TabIndex = 0;
             label1.Text = "Login";
             // 
+            // linkToBooking
+            // 
+            linkToBooking.AutoSize = true;
+            linkToBooking.Location = new Point(168, 166);
+            linkToBooking.Name = "linkToBooking";
+            linkToBooking.Size = new Size(152, 20);
+            linkToBooking.TabIndex = 5;
+            linkToBooking.TabStop = true;
+            linkToBooking.Text = "Access as a Passenger";
+            linkToBooking.LinkClicked += linkToBooking_LinkClicked;
+            // 
             // LoginClient
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -194,5 +207,6 @@
         private Label label2;
         private Label label1;
         private PictureBox pictureBox1;
+        private LinkLabel linkToBooking;
     }
 }

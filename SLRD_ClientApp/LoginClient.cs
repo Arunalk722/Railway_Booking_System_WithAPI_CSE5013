@@ -1,4 +1,5 @@
 using SLRD_ClientApp.Class_flies;
+using SLRD_ClientApp.Controlers;
 using SLRD_ClientApp.Properties;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -29,22 +30,28 @@ namespace SLRD_ClientApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (createToken())
-            {
-                isLoginSuccesful();
+            if (txtUserName.Text.Length >2 && txtPwd.Text .Length>2) {
+                if (createToken(txtUserName.Text))
+                {
+                    isLoginSuccesful();
+                }
             }
-          
-     
+            else
+            {
+                MessageBox.Show("Please enter UserName and Password");
+            }
+
+
         }
 
-        bool createToken()
+        bool createToken(string userName)
         {
             WebTokenRequestModel request = new WebTokenRequestModel
             {
                 userIP = "127.0.0.1",
                 tokenKey = "424693eb479b9953",
                 tokenHash = "0049dA87db8945aq",
-                userName = "ExampleUserName",
+                userName = userName,
                 userGUID = Guid.NewGuid().ToString(),
                 requestTime = DateTime.Now.AddDays(1),
             };
@@ -56,22 +63,22 @@ namespace SLRD_ClientApp
             {
                 LoginClass user = new LoginClass
                 {
-                    Pwd=txtPwd.Text,
-                    Token=SystemFuntion.Token,
-                    UserName=txtUserName.Text,
-                };               
+                    Pwd = txtPwd.Text,
+                    Token = SystemFuntion.Token,
+                    UserName = txtUserName.Text,
+                };
                 var response = await client.PostAsJsonAsync("/UserAuthLogin", user);
                 response.EnsureSuccessStatusCode();
-                var responseBody = await response.Content.ReadAsStringAsync();             
+                var responseBody = await response.Content.ReadAsStringAsync();
                 using (JsonDocument rep = JsonDocument.Parse(responseBody))
                 {
                     JsonElement root = rep.RootElement;
-                   
-                  if(Convert.ToInt32(root.GetProperty("sCode").GetUInt32()) == 200)
+
+                    if (Convert.ToInt32(root.GetProperty("sCode").GetUInt32()) == 200)
                     {
                         SystemFuntion.Email = root.GetProperty("email").ToString();
                         SystemFuntion.UserName = root.GetProperty("userName").ToString();
-                       SystemFuntion.UserId = Convert.ToInt32(root.GetProperty("userId").GetUInt32());
+                        SystemFuntion.UserId = Convert.ToInt32(root.GetProperty("userId").GetUInt32());
                         SystemFuntion.UserRole = root.GetProperty("userRole").ToString();
                         SystemFuntion.UserRoleID = Convert.ToInt32(root.GetProperty("userRoleID").GetUInt32());
 
@@ -84,20 +91,26 @@ namespace SLRD_ClientApp
                     {
 
                     }
-                   
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-               
+
 
             }
-        
+
         }
 
+        private void linkToBooking_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            HomeScreen homeScreen = new HomeScreen();
+            homeScreen.Show();
+            createToken("Guest");
+        }
     }
 
 
-    
+
 }

@@ -71,9 +71,8 @@
             lblMessage.AutoSize = true;
             lblMessage.Location = new Point(37, 17);
             lblMessage.Name = "lblMessage";
-            lblMessage.Size = new Size(67, 20);
+            lblMessage.Size = new Size(0, 20);
             lblMessage.TabIndex = 0;
-            lblMessage.Text = "Message";
             // 
             // menuStrip1
             // 
